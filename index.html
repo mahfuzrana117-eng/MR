@@ -32,236 +32,98 @@
         #welcome-toast {
             visibility: hidden;
             min-width: 280px;
-            background: var(--primary-gradient);
-            color: #ffffff;
+            background-color: var(--accent-color);
+            color: #0f172a;
             text-align: center;
-            border-radius: 16px;
-            padding: 16px 24px;
+            border-radius: 12px;
+            padding: 16px;
             position: fixed;
             z-index: 1000;
             left: 50%;
             bottom: 30px;
             transform: translateX(-50%);
-            font-weight: 600;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
-            border: 1px solid rgba(255,255,255,0.1);
+            font-weight: 700;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            font-family: 'Hind Siliguri', sans-serif;
         }
 
         #welcome-toast.show {
             visibility: visible;
-            animation: fadein 0.5s ease-out, fadeout 0.5s ease-in 2.5s;
+            animation: fadein 0.5s, fadeout 0.5s 2.5s;
         }
 
         @keyframes fadein { from {bottom: 0; opacity: 0;} to {bottom: 30px; opacity: 1;} }
         @keyframes fadeout { from {bottom: 30px; opacity: 1;} to {bottom: 0; opacity: 0;} }
 
-        /* ------------------ পাসওয়ার্ড পপ-আপ (Modal) স্টাইল ------------------ */
-        #password-modal {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(15, 23, 42, 0.6);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-            opacity: 0;
-            pointer-events: none;
-            transition: all 0.4s ease;
-        }
-
-        #password-modal.open {
-            opacity: 1;
-            pointer-events: auto;
-        }
-
-        .auth-box {
-            background: rgba(30, 41, 59, 0.95);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 35px 25px;
-            border-radius: 24px;
-            text-align: center;
-            max-width: 350px;
-            width: 90%;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.6);
-            transform: scale(0.8);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        #password-modal.open .auth-box {
-            transform: scale(1);
-        }
-
-        .auth-box i.lock-icon {
-            font-size: 36px;
-            color: var(--accent-color);
-            margin-bottom: 12px;
-        }
-
-        .auth-box h2 { font-size: 20px; margin-bottom: 8px; }
-        .auth-box p { font-size: 13px; color: #94a3b8; margin-bottom: 18px; }
-
-        .password-wrapper { position: relative; width: 100%; }
-        
-        .auth-box input[type="password"] {
-            width: 100%;
-            padding: 12px 18px;
-            padding-right: 45px;
-            border-radius: 12px;
-            border: 1px solid rgba(255,255,255,0.1);
-            background: rgba(15, 23, 42, 0.6);
-            color: white;
-            font-size: 15px;
-            text-align: center;
-            outline: none;
-            transition: 0.3s;
-        }
-
-        .auth-box input[type="password"]:focus {
-            border-color: var(--accent-color);
-        }
-
-        .toggle-password {
-            position: absolute;
-            right: 15px; top: 50%;
-            transform: translateY(-50%);
-            cursor: pointer;
-            color: #94a3b8;
-        }
-
-        .btn-group { display: flex; gap: 10px; margin-top: 15px; }
-
-        .auth-box button {
-            flex: 1;
-            padding: 12px;
-            border-radius: 12px;
-            border: none;
-            font-size: 14px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        .btn-submit { background: var(--primary-gradient); color: white; }
-        .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(168, 85, 247, 0.4); }
-        
-        .btn-cancel { background: rgba(255,255,255,0.05); color: #94a3b8; border: 1px solid rgba(255,255,255,0.1) !important; }
-        .btn-cancel:hover { background: rgba(255,255,255,0.1); color: white; }
-
-        #error-msg {
-            color: #ef4444;
-            font-size: 13px;
-            margin-top: 10px;
-            display: none;
-            font-weight: 600;
-        }
-
-        /* ------------------ পোর্টফোলিও কার্ড স্টাইল ------------------ */
+        /* Portfolio Card Styles */
         .portfolio-card {
             background: var(--card-glass);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            backdrop-filter: blur(15px);
             max-width: 420px;
             width: 100%;
-            border-radius: 32px;
+            border-radius: 30px;
             padding: 40px 30px;
-            box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.6);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
             text-align: center;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            animation: cardAppear 0.6s ease-out;
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        @keyframes cardAppear { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .image-container { position: relative; width: 130px; height: 130px; margin: 0 auto 20px; }
+        .profile-img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 3px solid transparent; background: linear-gradient(var(--card-glass), var(--card-glass)) padding-box, var(--primary-gradient) border-box; padding: 5px; }
 
-        .image-container { position: relative; width: 130px; height: 130px; margin: 0 auto 24px; }
-        .profile-img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 3px solid transparent; background: linear-gradient(var(--card-glass), var(--card-glass)) padding-box, var(--primary-gradient) border-box; padding: 5px; transition: transform 0.5s ease; }
-        .portfolio-card:hover .profile-img { transform: scale(1.04) rotate(2deg); }
+        h1 { font-size: 26px; margin-bottom: 5px; }
+        .title { color: var(--accent-color); font-size: 15px; margin-bottom: 25px; }
 
-        h1 { font-size: 28px; font-weight: 700; margin-bottom: 6px; letter-spacing: -0.5px; }
-        .title { color: var(--accent-color); font-size: 15px; margin-bottom: 30px; }
-
-        .section-box { background: rgba(15, 23, 42, 0.4); border-radius: 20px; padding: 20px; margin-bottom: 20px; border: 1px solid rgba(255, 255, 255, 0.03); text-align: left; }
-        .section-title { font-size: 13px; text-transform: uppercase; color: #94a3b8; margin-bottom: 18px; text-align: center; letter-spacing: 1.5px; font-weight: 600; }
-
-        .links-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
-        
-        .link-item { 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            gap: 10px; 
-            text-decoration: none; 
-            color: #e2e8f0; 
-            padding: 12px; 
-            border-radius: 14px; 
-            font-size: 14px; 
-            font-weight: 600; 
-            background: rgba(255, 255, 255, 0.03); 
-            border: 1px solid rgba(255, 255, 255, 0.05); 
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); 
-            cursor: pointer;
+        .section-box {
+            background: rgba(15, 23, 42, 0.4);
+            border-radius: 20px;
+            padding: 20px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            text-align: left;
         }
 
-        /* লক করা বাটনগুলোতে ছোট প্যাডলক আইকন ইন্ডিকেটর (ঐচ্ছিক) */
-        .link-item.secure::after {
-            content: "\f023";
-            font-family: "Font Awesome 5 Free";
-            font-weight: 900;
-            font-size: 10px;
-            color: rgba(255,255,255,0.4);
-            margin-left: auto;
+        .section-title { font-size: 12px; text-transform: uppercase; color: #94a3b8; margin-bottom: 15px; text-align: center; letter-spacing: 1px; }
+
+        .links-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+
+        .link-item {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            text-decoration: none;
+            color: white;
+            padding: 10px;
+            border-radius: 10px;
+            font-size: 13px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: 0.3s;
         }
 
-        .link-item.phone:hover { background: #10b981; border-color: #10b981; transform: translateY(-3px); }
-        .link-item.whatsapp:hover { background: #25d366; border-color: #25d366; transform: translateY(-3px); }
-        .link-item.instagram:hover { background: #e1306c; border-color: #e1306c; transform: translateY(-3px); }
-        .link-item.threads:hover { background: #000000; border-color: #ffffff; transform: translateY(-3px); }
-        .link-item.telegram:hover { background: #0088cc; border-color: #0088cc; transform: translateY(-3px); }
-        .link-item.facebook:hover { background: #1877f2; border-color: #1877f2; transform: translateY(-3px); }
-
-        .info-item { display: flex; align-items: center; gap: 14px; }
-        .info-item i { background: linear-gradient(135deg, #22d3ee 0%, #06b6d4 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; font-size: 18px; }
-        .info-text p { font-size: 15px; font-weight: 600; }
+        .link-item:hover { background: rgba(255, 255, 255, 0.1); border-color: var(--accent-color); }
+        .info-item { display: flex; align-items: flex-start; gap: 12px; }
+        .info-item i { color: var(--accent-color); margin-top: 4px; }
     </style>
 </head>
 <body>
 
-    <!-- পাসওয়ার্ড পপ-আপ (Modal) লেয়ার -->
-    <div id="password-modal">
-        <div class="auth-box">
-            <i class="fas fa-lock lock-icon"></i>
-            <h2>Private Contact</h2>
-            <p>যোগাযোগের মাধ্যমটি দেখতে সঠিক পাসওয়ার্ড দিন।</p>
-            <div class="password-wrapper">
-                <input type="password" id="modal-pass-input" placeholder="পাসওয়ার্ড লিখুন...">
-                <i class="fas fa-eye toggle-password" id="eye-icon" onclick="togglePassView()"></i>
-            </div>
-            <div class="btn-group">
-                <button class="btn-cancel" onclick="closeModal()">Cancel</button>
-                <button class="btn-submit" onclick="verifyContact()">Verify</button>
-            </div>
-            <p id="error-msg">❌ ভুল পাসওয়ার্ড! আবার চেষ্টা করুন।</p>
-        </div>
-    </div>
+    <div id="welcome-toast">ধন্যবাদ, আমার এই ওয়েবসাইট-এ আপনাকে স্বাগতম!</div>
 
-    <!-- টোস্ট নোটিফিকেশন -->
-    <div id="welcome-toast">আমার ওয়েবসাইট এ আপনাকে স্বাগতম! 😊</div>
-
-    <!-- পোর্টফোলিও কার্ড -->
     <div class="portfolio-card">
         <div class="image-container">
             <img src="IMG_20260331_195455.jpg" alt="Md Mahfuz Rana" class="profile-img">
         </div>
         
         <h1>Md Mahfuz Rana</h1>
-        <p class="title">Student,M.M.A </p>
+        <p class="title">Student, Masjid Mission Academy</p>
 
         <div class="section-box">
             <div class="info-item">
-                <i class="fas fa-map-marker-alt"></i>
-                <div class="info-text">
-                    <small style="color:#94a3b8; display:block; margin-bottom: 2px;">Current Address</small>
+                <i class="fas fa-home"></i>
+                <div>
+                    <small style="color:#94a3b8">Current Address</small>
                     <p>Rajshahi, Bangladesh.</p>
                 </div>
             </div>
@@ -270,83 +132,22 @@
         <div class="section-box">
             <p class="section-title">Connect With Me</p>
             <div class="links-grid">
-                <!-- সুরক্ষিত বাটন (এগুলোতে ক্লিক করলে পাসওয়ার্ড চাবে) -->
-                <div onclick="requestAccess('tel:+8801799264290')" class="link-item phone secure"><i class="fas fa-phone-alt"></i> Call</div>
-                <div onclick="requestAccess('https://wa.me/8801799264290')" class="link-item whatsapp secure"><i class="fab fa-whatsapp"></i> WhatsApp</div>
-                <div onclick="requestAccess('https://t.me/+8801799264290')" class="link-item telegram secure"><i class="fab fa-telegram-plane"></i> Telegram</div>
-                
-                <!-- ওপেন বাটন (যে কেউ সরাসরি ঢুকতে পারবে) -->
-                <a href="https://www.facebook.com/share/1BM9QbkLbU/" target="_blank" class="link-item facebook"><i class="fab fa-facebook-f"></i> Facebook</a>
-                <a href="https://www.instagram.com/mahfuzur_rahman_mahfuz_?igsh=dWQyd3llNXNqcnIw" target="_blank" class="link-item instagram"><i class="fab fa-instagram"></i> Instagram</a>
-                <a href="https://www.threads.net/@mahfuzur_rahman_mahfuz_" target="_blank" class="link-item threads"><i class="fab fa-threads"></i> Threads</a>
+                <a href="tel:+8801799264290" class="link-item"><i class="fas fa-phone-alt"></i> Call</a>
+                <a href="https://wa.me/8801799264290" class="link-item"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+                <a href="https://www.instagram.com/mahfuzur_rahman_mahfuz_?igsh=dWQyd3llNXNqcnIw" class="link-item"><i class="fab fa-instagram"></i> Instagram</a>
+                <a href="https://www.threads.net/@mahfuzur_rahman_mahfuz_" class="link-item"><i class="fab fa-threads"></i> Threads</a>
+                <a href="https://t.me/+8801799264290" class="link-item"><i class="fab fa-telegram-plane"></i> Telegram</a>
+                <a href="https://www.facebook.com/share/1BM9QbkLbU/" class="link-item"><i class="fab fa-facebook-f"></i> Facebook</a>
             </div>
         </div>
     </div>
 
     <script>
-        // পেজ লোড হলে ওয়েলকাম টোস্ট দেখানোর আদি কোড
         window.onload = function() {
             var x = document.getElementById("welcome-toast");
             x.className = "show";
             setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
         };
-
-        // পাসওয়ার্ড এবং টার্গেট লিংক ভ্যারিয়েবল
-        const SECURE_PASSWORD = "mahfUzweb"; // আপনার গোপন পাসওয়ার্ড এখানে দিন
-        let pendingLink = ""; 
-
-        // কোনো সুরক্ষিত বাটনে ক্লিক করলে এই ফাংশন রান হবে
-        function requestAccess(link) {
-            pendingLink = link;
-            document.getElementById("password-modal").classList.add("open");
-            document.getElementById("modal-pass-input").focus();
-        }
-
-        // পপ-আপ বন্ধ করার ফাংশন
-        function closeModal() {
-            document.getElementById("password-modal").classList.remove("open");
-            document.getElementById("modal-pass-input").value = "";
-            document.getElementById("error-msg").style.display = "none";
-            pendingLink = "";
-        }
-
-        // পাসওয়ার্ড যাচাই করার ফাংশن
-        function verifyContact() {
-            const userInput = document.getElementById("modal-pass-input").value;
-            const errorMsg = document.getElementById("error-msg");
-
-            if (userInput === SECURE_PASSWORD) {
-                // পাসওয়ার্ড ঠিক হলে নতুন ট্যাবে লিংকটি ওপেন হবে
-                window.open(pendingLink, '_blank');
-                closeModal();
-            } else {
-                // ভুল পাসওয়ার্ড হলে এরর দেখাবে
-                errorMsg.style.display = "block";
-                document.getElementById("modal-pass-input").value = "";
-            }
-        }
-
-        // ইনপুট বক্সে 'Enter' চাপলে যেন সাবমিট হয়
-        document.getElementById("modal-pass-input").addEventListener("keypress", function(event) {
-            if (event.key === "Enter") {
-                verifyContact();
-            }
-        });
-
-        // পাসওয়ার্ড চোখ আইকন দিয়ে হাইড/শো করার ফাংশন
-        function togglePassView() {
-            const passInput = document.getElementById("modal-pass-input");
-            const eyeIcon = document.getElementById("eye-icon");
-            if (passInput.type === "password") {
-                passInput.type = "text";
-                eyeIcon.classList.remove("fa-eye");
-                eyeIcon.classList.add("fa-eye-slash");
-            } else {
-                passInput.type = "password";
-                eyeIcon.classList.remove("fa-eye-slash");
-                eyeIcon.classList.add("fa-eye");
-            }
-        }
     </script>
 </body>
 </html>
