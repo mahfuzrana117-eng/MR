@@ -134,7 +134,8 @@
       cursor: pointer;
     }
 
-    .nav-links a:hover, .nav-links a.active-link {
+    .nav-links a:hover,
+    .nav-links a.active-link {
       color: var(--secondary);
     }
 
@@ -167,7 +168,7 @@
       cursor: pointer;
     }
 
-    /* Section Control (SPA behavior) */
+    /* Section Control */
     .page-section {
       display: none;
       padding: 100px 0;
@@ -184,8 +185,15 @@
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(15px); }
-      to { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(15px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     /* Hero */
@@ -199,31 +207,31 @@
       display: grid;
       grid-template-columns: 1.1fr 0.9fr;
       align-items: center;
-      gap: 60px;
+      gap: 50px;
     }
 
     .badge {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 8px 14px;
+      padding: 7px 13px;
       border: 1px solid rgba(34, 211, 238, 0.25);
       background: rgba(34, 211, 238, 0.06);
       border-radius: 30px;
       color: var(--secondary);
-      font-size: 13px;
-      margin-bottom: 22px;
+      font-size: 12px;
+      margin-bottom: 20px;
     }
 
     .badge i {
-      font-size: 8px;
+      font-size: 7px;
     }
 
     .hero h1 {
-      font-size: clamp(42px, 6vw, 70px);
+      font-size: clamp(40px, 5.5vw, 64px);
       line-height: 1.12;
-      letter-spacing: -3px;
-      margin-bottom: 22px;
+      letter-spacing: -2.5px;
+      margin-bottom: 20px;
     }
 
     .hero h1 span {
@@ -235,7 +243,7 @@
     .hero p {
       color: var(--muted);
       max-width: 520px;
-      font-size: 16px;
+      font-size: 15px;
     }
 
     /* Profile Card */
@@ -245,11 +253,15 @@
     }
 
     .profile-card {
-      width: 340px;
-      height: 400px;
+      width: 320px;
+      height: 370px;
       border: 1px solid var(--border);
       border-radius: 25px;
-      background: linear-gradient(145deg, rgba(59, 130, 246, 0.12), var(--card));
+      background: linear-gradient(
+        145deg,
+        rgba(59, 130, 246, 0.12),
+        var(--card)
+      );
       backdrop-filter: blur(20px);
       box-shadow: var(--shadow);
       display: flex;
@@ -271,27 +283,22 @@
     }
 
     .profile-img {
-      width: 170px;
-      height: 170px;
+      width: 180px;
+      height: 180px;
       border-radius: 50%;
-      border: 4px solid rgba(34, 211, 238, 0.6);
-      background: linear-gradient(135deg, #172554, #0f172a);
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      border: 4px solid rgba(34, 211, 238, 0.65);
+      object-fit: cover;
+      object-position: center;
+      display: block;
       position: relative;
       z-index: 1;
       overflow: hidden;
-    }
-
-    .profile-img i {
-      font-size: 75px;
-      color: #64748b;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
     }
 
     .profile-card h3 {
-      margin-top: 22px;
-      font-size: 22px;
+      margin-top: 18px;
+      font-size: 20px;
       position: relative;
       z-index: 1;
     }
@@ -306,7 +313,7 @@
     .socials {
       display: flex;
       gap: 12px;
-      margin-top: 18px;
+      margin-top: 15px;
       position: relative;
       z-index: 1;
     }
@@ -353,687 +360,4 @@
     .section-title p {
       color: var(--muted);
       font-size: 14px;
-      margin-top: 10px;
-    }
-
-    /* Common Card Styles */
-    .glass-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 30px;
-      backdrop-filter: blur(15px);
-      box-shadow: var(--shadow);
-    }
-
-    /* About */
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 25px;
-    }
-
-    .glass-card h3 {
-      font-size: 20px;
-      margin-bottom: 15px;
-    }
-
-    .glass-card p {
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    .info-list {
-      list-style: none;
-      margin-top: 20px;
-    }
-
-    .info-list li {
-      display: flex;
-      justify-content: space-between;
-      padding: 12px 0;
-      border-bottom: 1px solid var(--border);
-      font-size: 13px;
-    }
-
-    .info-list li:last-child {
-      border-bottom: none;
-    }
-
-    .info-list span:first-child {
-      color: var(--muted);
-    }
-
-    .info-list span:last-child {
-      color: var(--text);
-      font-weight: 500;
-    }
-
-    /* Skills */
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 18px;
-    }
-
-    .skill-card {
-      text-align: center;
-      padding: 28px 15px;
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      background: var(--card);
-      transition: 0.3s;
-    }
-
-    .skill-card:hover {
-      transform: translateY(-7px);
-      border-color: rgba(34, 211, 238, 0.4);
-    }
-
-    .skill-card i {
-      font-size: 35px;
-      color: var(--secondary);
-      margin-bottom: 15px;
-    }
-
-    .skill-card h4 {
-      font-size: 15px;
-      margin-bottom: 5px;
-    }
-
-    .skill-card p {
-      color: var(--muted);
-      font-size: 12px;
-    }
-
-    /* Projects */
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 22px;
-    }
-
-    .project-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      overflow: hidden;
-      transition: 0.3s;
-    }
-
-    .project-card:hover {
-      transform: translateY(-7px);
-      border-color: rgba(59, 130, 246, 0.4);
-    }
-
-    .project-img {
-      height: 170px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: linear-gradient(135deg, #172554, #0f172a);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .project-img::before {
-      content: "";
-      width: 180px;
-      height: 180px;
-      background: var(--primary);
-      filter: blur(70px);
-      opacity: 0.25;
-      position: absolute;
-    }
-
-    .project-img i {
-      font-size: 55px;
-      color: var(--secondary);
-      position: relative;
-    }
-
-    .project-info {
-      padding: 22px;
-    }
-
-    .project-info h3 {
-      font-size: 18px;
-      margin-bottom: 8px;
-    }
-
-    .project-info p {
-      color: var(--muted);
-      font-size: 13px;
-      margin-bottom: 15px;
-    }
-
-    .tags {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-
-    .tag {
-      padding: 5px 10px;
-      background: rgba(59, 130, 246, 0.1);
-      color: var(--secondary);
-      border-radius: 5px;
-      font-size: 11px;
-    }
-
-    /* Contact */
-    .contact-grid {
-      display: grid;
-      grid-template-columns: 0.8fr 1.2fr;
-      gap: 25px;
-    }
-
-    .contact-item {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-      margin-bottom: 22px;
-    }
-
-    .contact-icon {
-      width: 45px;
-      height: 45px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 12px;
-      background: rgba(34, 211, 238, 0.08);
-      color: var(--secondary);
-      font-size: 18px;
-      flex-shrink: 0;
-    }
-
-    .contact-item h4 {
-      font-size: 14px;
-    }
-
-    .contact-item p {
-      color: var(--muted);
-      font-size: 13px;
-    }
-
-    .contact-item a:hover {
-      color: var(--secondary);
-    }
-
-    form {
-      display: grid;
-      gap: 15px;
-    }
-
-    input, textarea {
-      width: 100%;
-      padding: 14px 16px;
-      border-radius: 10px;
-      border: 1px solid var(--border);
-      background: var(--bg-soft);
-      color: var(--text);
-      outline: none;
-      font-family: inherit;
-      font-size: 13px;
-      transition: 0.3s;
-    }
-
-    input:focus, textarea:focus {
-      border-color: var(--secondary);
-    }
-
-    textarea {
-      height: 130px;
-      resize: vertical;
-    }
-    
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 13px 22px;
-      border-radius: 10px;
-      font-size: 14px;
-      font-weight: 600;
-      transition: 0.3s;
-      cursor: pointer;
-    }
-
-    .btn-primary {
-      color: white;
-      background: linear-gradient(135deg, var(--primary), #2563eb);
-      box-shadow: 0 10px 30px rgba(59, 130, 246, 0.2);
-      border: none;
-      width: fit-content;
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 15px 35px rgba(59, 130, 246, 0.35);
-    }
-
-    /* Footer */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 25px 0;
-      text-align: center;
-      color: var(--muted);
-      font-size: 13px;
-      margin-top: auto;
-    }
-
-    /* Responsive */
-    @media (max-width: 850px) {
-      .hero-content,
-      .about-grid,
-      .contact-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .hero {
-        padding-top: 100px;
-        padding-bottom: 60px;
-      }
-
-      .hero-content {
-        text-align: center;
-      }
-
-      .hero p {
-        margin-left: auto;
-        margin-right: auto;
-      }
-
-      .profile-wrap {
-        order: -1;
-      }
-
-      .skills-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .projects-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .profile-card {
-        width: 300px;
-        height: 360px;
-      }
-
-      .profile-img {
-        width: 140px;
-        height: 140px;
-      }
-
-      .profile-img i {
-        font-size: 60px;
-      }
-
-      .nav-links {
-        position: absolute;
-        top: 75px;
-        left: 0;
-        width: 100%;
-        background: var(--bg-soft);
-        flex-direction: column;
-        padding: 25px;
-        gap: 20px;
-        display: none;
-        border-bottom: 1px solid var(--border);
-        box-shadow: var(--shadow);
-      }
-
-      .nav-links.active {
-        display: flex;
-      }
-
-      .menu-btn {
-        display: block;
-      }
-    }
-
-    @media (max-width: 450px) {
-      .hero h1 {
-        font-size: 38px;
-        letter-spacing: -1.5px;
-      }
-
-      .section-title h2 {
-        font-size: 28px;
-      }
-
-      .skills-grid {
-        gap: 12px;
-      }
-
-      .skill-card {
-        padding: 22px 10px;
-      }
-
-      .glass-card {
-        padding: 22px;
-      }
-    }
-  </style>
-</head>
-
-<body>
-
-  <!-- Navbar -->
-  <header>
-    <div class="container">
-      <nav>
-        <a href="#home" class="logo" onclick="navigate('home')">Mahfuz<span>.</span></a>
-
-        <ul class="nav-links" id="navLinks">
-          <li><a onclick="navigate('home')" class="active-link">Home</a></li>
-          <li><a onclick="navigate('about')">About</a></li>
-          <li><a onclick="navigate('skills')">Skills</a></li>
-          <li><a onclick="navigate('projects')">Projects</a></li>
-          <li><a onclick="navigate('contact')">Contact</a></li>
-        </ul>
-
-        <div class="nav-actions">
-          <button class="icon-btn" id="themeBtn" onclick="toggleTheme()">
-            <i class="fas fa-sun"></i>
-          </button>
-
-          <button class="menu-btn" onclick="toggleMenu()">
-            <i class="fas fa-bars"></i>
-          </button>
-        </div>
-      </nav>
-    </div>
-  </header>
-
-  <!-- Hero (Home Page) -->
-  <section class="page-section hero active" id="home">
-    <div class="container">
-      <div class="hero-content">
-
-        <div>
-          <div class="badge">
-            <i class="fas fa-circle"></i>
-            Welcome to my portfolio
-          </div>
-
-          <h1>
-            Hi, I'm <br>
-            <span>Md Mahfuz Rana</span>
-          </h1>
-
-          <p>
-            Assalamualaikum আমার ওয়েবসাইটে আপনাকে স্বাগতম 
-          </p>
-        </div>
-
-        <div class="profile-wrap">
-          <div class="profile-card">
-
-            <img src="profile.jpg" alt="Md Mahfuz Rana" class="profile-img">
-
-            <h3>Md Mahfuz Rana</h3>
-            <p>Student • Web Enthusiast</p>
-
-            <div class="socials">
-              <a href="https://www.facebook.com/share/19aAT7vTyc/"
-                 target="_blank" rel="noopener noreferrer"
-                 aria-label="Facebook">
-                <i class="fab fa-facebook-f"></i>
-              </a>
-
-              <a href="https://www.instagram.com/mahfuzur_rahman_mahfuz_?stkn=dWQyd3llNXNqcnIw"
-                 target="_blank" rel="noopener noreferrer"
-                 aria-label="Instagram">
-                <i class="fab fa-instagram"></i>
-              </a>
-
-              <a href="tel:09658083118" aria-label="Phone">
-                <i class="fas fa-phone"></i>
-              </a>
-            </div>
-
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- About -->
-  <section id="about" class="page-section">
-    <div class="container">
-      <div class="section-title">
-        <small>About Me</small>
-        <h2>নিজের সম্পর্কে কিছু কথা</h2>
-        <p>আমার পরিচয় ও বর্তমান লক্ষ্য</p>
-      </div>
-
-      <div class="about-grid">
-        <div class="glass-card">
-          <h3>আমি কে? 👋</h3>
-          <p>
-            আমি Md Mahfuz Rana। আমি একজন শিক্ষার্থী এবং ওয়েব ডিজাইন ও
-            প্রযুক্তির প্রতি আগ্রহী। নতুন কিছু শেখা, সুন্দর ডিজাইন তৈরি করা
-            এবং নিজের দক্ষতা বাড়ানো আমার লক্ষ্য।
-          </p>
-          <p style="margin-top: 15px;">
-            ভবিষ্যতে একজন দক্ষ ওয়েব ডেভেলপার হিসেবে কাজ করতে চাই।
-          </p>
-        </div>
-
-        <div class="glass-card">
-          <h3>Personal Info</h3>
-          <ul class="info-list">
-            <li><span>Name</span><span>Md Mahfuz Rana</span></li>
-            <li><span>Profession</span><span>Student</span></li>
-            <li><span>Location</span><span>Bangladesh</span></li>
-            <li><span>Interest</span><span>Web Design</span></li>
-            <li><span>Goal</span><span>Web Developer</span></li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Skills -->
-  <section id="skills" class="page-section">
-    <div class="container">
-      <div class="section-title">
-        <small>My Skills</small>
-        <h2>যে বিষয়গুলো শিখছি</h2>
-        <p>ধীরে ধীরে নিজের দক্ষতা বাড়াচ্ছি</p>
-      </div>
-
-      <div class="skills-grid">
-        <div class="skill-card">
-          <i class="fab fa-html5"></i>
-          <h4>HTML</h4>
-          <p>Web Structure</p>
-        </div>
-        <div class="skill-card">
-          <i class="fab fa-css3-alt"></i>
-          <h4>CSS</h4>
-          <p>Web Styling</p>
-        </div>
-        <div class="skill-card">
-          <i class="fab fa-js"></i>
-          <h4>JavaScript</h4>
-          <p>Web Interaction</p>
-        </div>
-        <div class="skill-card">
-          <i class="fas fa-palette"></i>
-          <h4>UI Design</h4>
-          <p>Creative Design</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Projects -->
-  <section id="projects" class="page-section">
-    <div class="container">
-      <div class="section-title">
-        <small>My Projects</small>
-        <h2>আমার প্রজেক্টসমূহ</h2>
-        <p>আমার তৈরি করা কাজগুলো</p>
-      </div>
-
-      <div class="projects-grid">
-        <div class="project-card">
-          <div class="project-img">
-            <i class="fas fa-user-circle"></i>
-          </div>
-          <div class="project-info">
-            <h3>Personal Portfolio</h3>
-            <p>নিজের পরিচয় ও কাজ প্রদর্শনের জন্য একটি আধুনিক ওয়েবসাইট।</p>
-            <div class="tags">
-              <span class="tag">HTML</span>
-              <span class="tag">CSS</span>
-              <span class="tag">JavaScript</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="project-card">
-          <div class="project-img">
-            <i class="fas fa-graduation-cap"></i>
-          </div>
-          <div class="project-info">
-            <h3>Student Portal</h3>
-            <p>শিক্ষার্থীদের তথ্য ও প্রয়োজনীয় লিংক প্রদর্শনের একটি ডিজাইন।</p>
-            <div class="tags">
-              <span class="tag">HTML</span>
-              <span class="tag">CSS</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="project-card">
-          <div class="project-img">
-            <i class="fas fa-laptop-code"></i>
-          </div>
-          <div class="project-info">
-            <h3>Coming Soon</h3>
-            <p>ভবিষ্যতে তৈরি করা নতুন প্রজেক্ট এখানে যুক্ত করা হবে।</p>
-            <div class="tags">
-              <span class="tag">Future</span>
-              <span class="tag">Project</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Contact -->
-  <section id="contact" class="page-section">
-    <div class="container">
-      <div class="section-title">
-        <small>Contact Me</small>
-        <h2>যোগাযোগ করুন</h2>
-        <p>আপনার কোনো প্রশ্ন থাকলে মেসেজ করতে পারেন</p>
-      </div>
-
-      <div class="contact-grid">
-        <div class="glass-card">
-          <h3>Let's Connect 🤝</h3>
-          <p style="margin-bottom: 25px;">
-            নতুন কোনো প্রজেক্ট বা আইডিয়া নিয়ে কথা বলতে চাইলে যোগাযোগ করুন।
-          </p>
-
-          <div class="contact-item">
-            <div class="contact-icon"><i class="fas fa-phone"></i></div>
-            <div>
-              <h4>Phone</h4>
-              <p><a href="tel:09658083118">09658083118</a></p>
-            </div>
-          </div>
-
-          <div class="contact-item">
-            <div class="contact-icon"><i class="fab fa-facebook-f"></i></div>
-            <div>
-              <h4>Facebook</h4>
-              <p><a href="https://www.facebook.com/share/19aAT7vTyc/" target="_blank">Visit my Facebook</a></p>
-            </div>
-          </div>
-
-          <div class="contact-item">
-            <div class="contact-icon"><i class="fab fa-instagram"></i></div>
-            <div>
-              <h4>Instagram</h4>
-              <p><a href="https://www.instagram.com/mahfuzur_rahman_mahfuz_?stkn=dWQyd3llNXNqcnIw" target="_blank">@mahfuzur_rahman_mahfuz_</a></p>
-            </div>
-          </div>
-        </div>
-
-        <div class="glass-card">
-          <form onsubmit="sendMessage(event)">
-            <input type="text" placeholder="আপনার নাম" required>
-            <input type="email" placeholder="আপনার ইমেইল" required>
-            <textarea placeholder="আপনার মেসেজ লিখুন..." required></textarea>
-            <button type="submit" class="btn btn-primary">
-              Send Message <i class="fas fa-paper-plane"></i>
-            </button>
-          </form>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer>
-    <div class="container">
-      © 2026 Md Mahfuz Rana. All Rights Reserved.
-    </div>
-  </footer>
-
-  <script>
-    function toggleTheme() {
-      document.body.classList.toggle('light');
-      const icon = document.querySelector('#themeBtn i');
-      if (document.body.classList.contains('light')) {
-        icon.className = 'fas fa-moon';
-      } else {
-        icon.className = 'fas fa-sun';
-      }
-    }
-
-    function toggleMenu() {
-      document.getElementById('navLinks').classList.toggle('active');
-    }
-
-    // Navigation logic to hide/show sections
-    function navigate(sectionId) {
-      // Hide all sections
-      const sections = document.querySelectorAll('.page-section');
-      sections.forEach(sec => sec.classList.remove('active'));
-
-      // Remove active class from all links
-      const links = document.querySelectorAll('.nav-links a');
-      links.forEach(link => link.classList.remove('active-link'));
-
-      // Show targeted section
-      document.getElementById(sectionId).classList.add('active');
-
-      // Make clicked link active
-      event.target.classList.add('active-link');
-
-      // Close mobile menu
-      document.getElementById('navLinks').classList.remove('active');
-      
-      // Scroll to top automatically
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    }
-
-    function sendMessage(event) {
-      event.preventDefault();
-      alert('ধন্যবাদ! আপনার মেসেজটি গ্রহণ করা হয়েছে।');
-      event.target.reset();
-    }
-  </script>
-
-</body>
-  </html>
+      margin-top: 10px
