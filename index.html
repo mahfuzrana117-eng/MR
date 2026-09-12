@@ -1,17 +1,11 @@
-<!DOCTYPE html>
-<html lang="bn">
+<!DOCTYPE html><html lang="bn">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Md Mahfuz Rana | Portfolio</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <meta name="description" content="Md Mahfuz Rana - Personal Portfolio">
+  <title>Md Mahfuz Rana | Portfolio</title>  <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
-
-  <style>
+  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">  <style>
     :root {
       --bg: #070b14;
       --bg-soft: #0d1424;
@@ -27,7 +21,7 @@
     body.light {
       --bg: #f1f5f9;
       --bg-soft: #ffffff;
-      --card: rgba(255, 255, 255, 0.8);
+      --card: rgba(255, 255, 255, 0.85);
       --text: #0f172a;
       --muted: #64748b;
       --border: rgba(15, 23, 42, 0.1);
@@ -40,13 +34,17 @@
       box-sizing: border-box;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       font-family: 'Poppins', 'Hind Siliguri', sans-serif;
       background: var(--bg);
       color: var(--text);
       line-height: 1.7;
       overflow-x: hidden;
-      transition: 0.3s;
+      transition: background 0.3s, color 0.3s;
       min-height: 100vh;
       display: flex;
       flex-direction: column;
@@ -63,6 +61,7 @@
       top: -200px;
       left: -150px;
       z-index: -1;
+      pointer-events: none;
     }
 
     body::after {
@@ -76,11 +75,18 @@
       bottom: -200px;
       right: -100px;
       z-index: -1;
+      pointer-events: none;
     }
 
     a {
       text-decoration: none;
       color: inherit;
+    }
+
+    button,
+    input,
+    textarea {
+      font-family: inherit;
     }
 
     .container {
@@ -134,7 +140,8 @@
       cursor: pointer;
     }
 
-    .nav-links a:hover, .nav-links a.active-link {
+    .nav-links a:hover,
+    .nav-links a.active-link {
       color: var(--secondary);
     }
 
@@ -158,6 +165,11 @@
       justify-content: center;
     }
 
+    .icon-btn:hover {
+      border-color: var(--secondary);
+      color: var(--secondary);
+    }
+
     .menu-btn {
       display: none;
       border: none;
@@ -167,10 +179,10 @@
       cursor: pointer;
     }
 
-    /* Section Control (SPA behavior) */
+    /* Section Control */
     .page-section {
       display: none;
-      padding: 100px 0;
+      padding: 110px 0 70px;
       flex: 1;
       animation: fadeIn 0.4s ease-in-out;
     }
@@ -181,25 +193,29 @@
 
     #home.active {
       display: flex;
+      align-items: center;
+      min-height: 100vh;
+      padding-top: 75px;
     }
 
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(15px); }
-      to { opacity: 1; transform: translateY(0); }
+      from {
+        opacity: 0;
+        transform: translateY(15px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     /* Hero */
-    .hero {
-      min-height: 100vh;
-      align-items: center;
-      padding-top: 80px;
-    }
-
     .hero-content {
       display: grid;
       grid-template-columns: 1.1fr 0.9fr;
       align-items: center;
       gap: 60px;
+      width: 100%;
     }
 
     .badge {
@@ -245,8 +261,8 @@
     }
 
     .profile-card {
-      width: 340px;
-      height: 400px;
+      width: 360px;
+      min-height: 430px;
       border: 1px solid var(--border);
       border-radius: 25px;
       background: linear-gradient(145deg, rgba(59, 130, 246, 0.12), var(--card));
@@ -258,6 +274,7 @@
       justify-content: center;
       position: relative;
       overflow: hidden;
+      padding: 30px 20px;
     }
 
     .profile-card::before {
@@ -268,25 +285,21 @@
       background: var(--primary);
       filter: blur(90px);
       opacity: 0.2;
+      pointer-events: none;
     }
 
     .profile-img {
-      width: 170px;
-      height: 170px;
+      width: 200px;
+      height: 200px;
       border-radius: 50%;
       border: 4px solid rgba(34, 211, 238, 0.6);
       background: linear-gradient(135deg, #172554, #0f172a);
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display: block;
+      object-fit: cover;
+      object-position: center;
       position: relative;
       z-index: 1;
-      overflow: hidden;
-    }
-
-    .profile-img i {
-      font-size: 75px;
-      color: #64748b;
+      box-shadow: 0 0 35px rgba(34, 211, 238, 0.15);
     }
 
     .profile-card h3 {
@@ -312,8 +325,8 @@
     }
 
     .socials a {
-      width: 35px;
-      height: 35px;
+      width: 38px;
+      height: 38px;
       border: 1px solid var(--border);
       border-radius: 50%;
       display: flex;
@@ -366,13 +379,6 @@
       box-shadow: var(--shadow);
     }
 
-    /* About */
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 25px;
-    }
-
     .glass-card h3 {
       font-size: 20px;
       margin-bottom: 15px;
@@ -383,6 +389,13 @@
       font-size: 14px;
     }
 
+    /* About */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 25px;
+    }
+
     .info-list {
       list-style: none;
       margin-top: 20px;
@@ -391,6 +404,7 @@
     .info-list li {
       display: flex;
       justify-content: space-between;
+      gap: 15px;
       padding: 12px 0;
       border-bottom: 1px solid var(--border);
       font-size: 13px;
@@ -407,6 +421,7 @@
     .info-list span:last-child {
       color: var(--text);
       font-weight: 500;
+      text-align: right;
     }
 
     /* Skills */
@@ -566,7 +581,8 @@
       gap: 15px;
     }
 
-    input, textarea {
+    input,
+    textarea {
       width: 100%;
       padding: 14px 16px;
       border-radius: 10px;
@@ -574,12 +590,12 @@
       background: var(--bg-soft);
       color: var(--text);
       outline: none;
-      font-family: inherit;
       font-size: 13px;
       transition: 0.3s;
     }
 
-    input:focus, textarea:focus {
+    input:focus,
+    textarea:focus {
       border-color: var(--secondary);
     }
 
@@ -587,7 +603,7 @@
       height: 130px;
       resize: vertical;
     }
-    
+
     .btn {
       display: inline-flex;
       align-items: center;
@@ -613,6 +629,25 @@
       box-shadow: 0 15px 35px rgba(59, 130, 246, 0.35);
     }
 
+    .btn-whatsapp {
+      color: white;
+      background: linear-gradient(135deg, #25d366, #128c7e);
+      box-shadow: 0 10px 30px rgba(37, 211, 102, 0.2);
+      border: none;
+      width: fit-content;
+    }
+
+    .btn-whatsapp:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 35px rgba(37, 211, 102, 0.35);
+    }
+
+    .form-buttons {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
     /* Footer */
     footer {
       border-top: 1px solid var(--border);
@@ -631,7 +666,7 @@
         grid-template-columns: 1fr;
       }
 
-      .hero {
+      #home.active {
         padding-top: 100px;
         padding-bottom: 60px;
       }
@@ -658,17 +693,13 @@
       }
 
       .profile-card {
-        width: 300px;
-        height: 360px;
+        width: 320px;
+        min-height: 390px;
       }
 
       .profile-img {
-        width: 140px;
-        height: 140px;
-      }
-
-      .profile-img i {
-        font-size: 60px;
+        width: 180px;
+        height: 180px;
       }
 
       .nav-links {
@@ -715,325 +746,448 @@
       .glass-card {
         padding: 22px;
       }
+
+      .profile-card {
+        width: 100%;
+        max-width: 320px;
+      }
+
+      .profile-img {
+        width: 170px;
+        height: 170px;
+      }
+
+      .info-list li {
+        font-size: 12px;
+      }
     }
-  </style>
-</head>
-
-<body>
-
-  <!-- Navbar -->
-  <header>
+  </style></head><body>  <!-- Navbar -->  <header>
     <div class="container">
       <nav>
-        <a href="#home" class="logo" onclick="navigate('home')">Mahfuz<span>.</span></a>
+        <a href="#home" class="logo" onclick="navigate('home'); return false;">
+          Mahfuz<span>.</span>
+        </a>    <ul class="nav-links" id="navLinks">
+      <li><a onclick="navigate('home')" class="active-link">Home</a></li>
+      <li><a onclick="navigate('about')">About</a></li>
+      <li><a onclick="navigate('skills')">Skills</a></li>
+      <li><a onclick="navigate('projects')">Projects</a></li>
+      <li><a onclick="navigate('contact')">Contact</a></li>
+    </ul>
 
-        <ul class="nav-links" id="navLinks">
-          <li><a onclick="navigate('home')" class="active-link">Home</a></li>
-          <li><a onclick="navigate('about')">About</a></li>
-          <li><a onclick="navigate('skills')">Skills</a></li>
-          <li><a onclick="navigate('projects')">Projects</a></li>
-          <li><a onclick="navigate('contact')">Contact</a></li>
-        </ul>
+    <div class="nav-actions">
+      <button class="icon-btn" id="themeBtn" onclick="toggleTheme()" aria-label="Toggle Theme">
+        <i class="fas fa-sun"></i>
+      </button>
 
-        <div class="nav-actions">
-          <button class="icon-btn" id="themeBtn" onclick="toggleTheme()">
-            <i class="fas fa-sun"></i>
-          </button>
-
-          <button class="menu-btn" onclick="toggleMenu()">
-            <i class="fas fa-bars"></i>
-          </button>
-        </div>
-      </nav>
+      <button class="menu-btn" onclick="toggleMenu()" aria-label="Toggle Menu">
+        <i class="fas fa-bars"></i>
+      </button>
     </div>
-  </header>
+  </nav>
+</div>
 
-  <!-- Hero (Home Page) -->
-  <section class="page-section hero active" id="home">
+  </header>  <!-- Home -->  <section class="page-section hero active" id="home">
     <div class="container">
-      <div class="hero-content">
+      <div class="hero-content">    <div>
+      <div class="badge">
+        <i class="fas fa-circle"></i>
+        Welcome to my portfolio
+      </div>
 
-        <div>
-          <div class="badge">
-            <i class="fas fa-circle"></i>
-            Welcome to my portfolio
-          </div>
+      <h1>
+        Hi, I'm <br>
+        <span>Md Mahfuz Rana</span>
+      </h1>
 
-          <h1>
-            Hi, I'm <br>
-            <span>Md Mahfuz Rana</span>
-          </h1>
+      <p>
+        Assalamualaikum, আমার ওয়েবসাইটে আপনাকে স্বাগতম।
+      </p>
+    </div>
 
-          <p>
-            Assalamualaikum আমার ওয়েবসাইটে আপনাকে স্বাগতম 
-          </p>
+    <div class="profile-wrap">
+      <div class="profile-card">
+
+        <img
+          src="profile.jpg"
+          alt="Md Mahfuz Rana"
+          class="profile-img"
+          onerror="this.style.display='none'; document.getElementById('photoFallback').style.display='flex';"
+        >
+
+        <div id="photoFallback" class="profile-img" style="display:none;">
+          <i class="fas fa-user"></i>
         </div>
 
-        <div class="profile-wrap">
-          <div class="profile-card">
+        <h3>Md Mahfuz Rana</h3>
+        <p>Student</p>
 
-            <img src="profile.jpg" alt="Md Mahfuz Rana" class="profile-img">
+        <div class="socials">
+          <a href="https://www.facebook.com/share/19aAT7vTyc/"
+             target="_blank"
+             rel="noopener noreferrer"
+             aria-label="Facebook">
+            <i class="fab fa-facebook-f"></i>
+          </a>
 
-            <h3>Md Mahfuz Rana</h3>
-            <p>Student • Web Enthusiast</p>
+          <a href="https://www.instagram.com/mahfuzur_rahman_mahfuz_?stkn=dWQyd3llNXNqcnIw"
+             target="_blank"
+             rel="noopener noreferrer"
+             aria-label="Instagram">
+            <i class="fab fa-instagram"></i>
+          </a>
 
-            <div class="socials">
-              <a href="https://www.facebook.com/share/19aAT7vTyc/"
-                 target="_blank" rel="noopener noreferrer"
-                 aria-label="Facebook">
-                <i class="fab fa-facebook-f"></i>
-              </a>
+          <a href="https://wa.me/8801799264290"
+             target="_blank"
+             rel="noopener noreferrer"
+             aria-label="WhatsApp">
+            <i class="fab fa-whatsapp"></i>
+          </a>
 
-              <a href="https://www.instagram.com/mahfuzur_rahman_mahfuz_?stkn=dWQyd3llNXNqcnIw"
-                 target="_blank" rel="noopener noreferrer"
-                 aria-label="Instagram">
-                <i class="fab fa-instagram"></i>
-              </a>
-
-              <a href="tel:09658083118" aria-label="Phone">
-                <i class="fas fa-phone"></i>
-              </a>
-            </div>
-
-          </div>
+          <a href="tel:09658083118" aria-label="Phone">
+            <i class="fas fa-phone"></i>
+          </a>
         </div>
 
       </div>
     </div>
-  </section>
 
-  <!-- About -->
-  <section id="about" class="page-section">
+  </div>
+</div>
+
+  </section>  <!-- About -->  <section id="about" class="page-section">
     <div class="container">
       <div class="section-title">
         <small>About Me</small>
         <h2>নিজের সম্পর্কে কিছু কথা</h2>
         <p>আমার পরিচয় ও বর্তমান লক্ষ্য</p>
-      </div>
+      </div>  <div class="about-grid">
+    <div class="glass-card">
+      <h3>আমি কে? 👋</h3>
+      <p>
+        আমি Md Mahfuz Rana। আমি একজন শিক্ষার্থী এবং ওয়েব ডিজাইন ও
+        প্রযুক্তির প্রতি আগ্রহী। নতুন কিছু শেখা, সুন্দর ডিজাইন তৈরি করা
+        এবং নিজের দক্ষতা বাড়ানো আমার লক্ষ্য।
+      </p>
 
-      <div class="about-grid">
-        <div class="glass-card">
-          <h3>আমি কে? 👋</h3>
-          <p>
-            আমি Md Mahfuz Rana। আমি একজন শিক্ষার্থী এবং ওয়েব ডিজাইন ও
-            প্রযুক্তির প্রতি আগ্রহী। নতুন কিছু শেখা, সুন্দর ডিজাইন তৈরি করা
-            এবং নিজের দক্ষতা বাড়ানো আমার লক্ষ্য।
-          </p>
-          <p style="margin-top: 15px;">
-            ভবিষ্যতে একজন দক্ষ ওয়েব ডেভেলপার হিসেবে কাজ করতে চাই।
-          </p>
-        </div>
-
-        <div class="glass-card">
-          <h3>Personal Info</h3>
-          <ul class="info-list">
-            <li><span>Name</span><span>Md Mahfuz Rana</span></li>
-            <li><span>Profession</span><span>Student</span></li>
-            <li><span>Location</span><span>Bangladesh</span></li>
-            <li><span>Interest</span><span>Web Design</span></li>
-            <li><span>Goal</span><span>Web Developer</span></li>
-          </ul>
-        </div>
-      </div>
+      <p style="margin-top: 15px;">
+        ভবিষ্যতে একজন দক্ষ ওয়েব ডেভেলপার হিসেবে কাজ করতে চাই।
+      </p>
     </div>
-  </section>
 
-  <!-- Skills -->
-  <section id="skills" class="page-section">
+    <div class="glass-card">
+      <h3>Personal Info</h3>
+
+      <ul class="info-list">
+        <li><span>Name</span><span>Md Mahfuz Rana</span></li>
+        <li><span>Profession</span><span>Student</span></li>
+        <li><span>Location</span><span>Bangladesh</span></li>
+        <li><span>Interest</span><span>Editor</span></li>
+        <li><span>Goal</span><span>Editor</span></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+  </section>  <!-- Skills -->  <section id="skills" class="page-section">
     <div class="container">
       <div class="section-title">
         <small>My Skills</small>
         <h2>যে বিষয়গুলো শিখছি</h2>
         <p>ধীরে ধীরে নিজের দক্ষতা বাড়াচ্ছি</p>
-      </div>
-
-      <div class="skills-grid">
-        <div class="skill-card">
-          <i class="fab fa-html5"></i>
-          <h4>HTML</h4>
-          <p>Web Structure</p>
-        </div>
-        <div class="skill-card">
-          <i class="fab fa-css3-alt"></i>
-          <h4>CSS</h4>
-          <p>Web Styling</p>
-        </div>
-        <div class="skill-card">
-          <i class="fab fa-js"></i>
-          <h4>JavaScript</h4>
-          <p>Web Interaction</p>
-        </div>
-        <div class="skill-card">
-          <i class="fas fa-palette"></i>
-          <h4>UI Design</h4>
-          <p>Creative Design</p>
-        </div>
-      </div>
+      </div>  <div class="skills-grid">
+    <div class="skill-card">
+      <i class="fab fa-html5"></i>
+      <h4>HTML</h4>
+      <p>Web Structure</p>
     </div>
-  </section>
 
-  <!-- Projects -->
-  <section id="projects" class="page-section">
+    <div class="skill-card">
+      <i class="fab fa-css3-alt"></i>
+      <h4>CSS</h4>
+      <p>Web Styling</p>
+    </div>
+
+    <div class="skill-card">
+      <i class="fab fa-js"></i>
+      <h4>JavaScript</h4>
+      <p>Web Interaction</p>
+    </div>
+
+    <div class="skill-card">
+      <i class="fas fa-palette"></i>
+      <h4>UI Design</h4>
+      <p>Creative Design</p>
+    </div>
+  </div>
+</div>
+
+  </section>  <!-- Projects -->  <section id="projects" class="page-section">
     <div class="container">
       <div class="section-title">
         <small>My Projects</small>
         <h2>আমার প্রজেক্টসমূহ</h2>
         <p>আমার তৈরি করা কাজগুলো</p>
+      </div>  <div class="projects-grid">
+    <div class="project-card">
+      <div class="project-img">
+        <i class="fas fa-user-circle"></i>
       </div>
 
-      <div class="projects-grid">
-        <div class="project-card">
-          <div class="project-img">
-            <i class="fas fa-user-circle"></i>
-          </div>
-          <div class="project-info">
-            <h3>Personal Portfolio</h3>
-            <p>নিজের পরিচয় ও কাজ প্রদর্শনের জন্য একটি আধুনিক ওয়েবসাইট।</p>
-            <div class="tags">
-              <span class="tag">HTML</span>
-              <span class="tag">CSS</span>
-              <span class="tag">JavaScript</span>
-            </div>
-          </div>
-        </div>
+      <div class="project-info">
+        <h3>Personal Portfolio</h3>
+        <p>নিজের পরিচয় ও কাজ প্রদর্শনের জন্য একটি আধুনিক ওয়েবসাইট।</p>
 
-        <div class="project-card">
-          <div class="project-img">
-            <i class="fas fa-graduation-cap"></i>
-          </div>
-          <div class="project-info">
-            <h3>Student Portal</h3>
-            <p>শিক্ষার্থীদের তথ্য ও প্রয়োজনীয় লিংক প্রদর্শনের একটি ডিজাইন।</p>
-            <div class="tags">
-              <span class="tag">HTML</span>
-              <span class="tag">CSS</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="project-card">
-          <div class="project-img">
-            <i class="fas fa-laptop-code"></i>
-          </div>
-          <div class="project-info">
-            <h3>Coming Soon</h3>
-            <p>ভবিষ্যতে তৈরি করা নতুন প্রজেক্ট এখানে যুক্ত করা হবে।</p>
-            <div class="tags">
-              <span class="tag">Future</span>
-              <span class="tag">Project</span>
-            </div>
-          </div>
+        <div class="tags">
+          <span class="tag">HTML</span>
+          <span class="tag">CSS</span>
+          <span class="tag">JavaScript</span>
         </div>
       </div>
     </div>
-  </section>
 
-  <!-- Contact -->
-  <section id="contact" class="page-section">
+    <div class="project-card">
+      <div class="project-img">
+        <i class="fas fa-graduation-cap"></i>
+      </div>
+
+      <div class="project-info">
+        <h3>Student Portal</h3>
+        <p>শিক্ষার্থীদের তথ্য ও প্রয়োজনীয় লিংক প্রদর্শনের একটি ডিজাইন।</p>
+
+        <div class="tags">
+          <span class="tag">HTML</span>
+          <span class="tag">CSS</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="project-card">
+      <div class="project-img">
+        <i class="fas fa-laptop-code"></i>
+      </div>
+
+      <div class="project-info">
+        <h3>Coming Soon</h3>
+        <p>ভবিষ্যতে তৈরি করা নতুন প্রজেক্ট এখানে যুক্ত করা হবে।</p>
+
+        <div class="tags">
+          <span class="tag">Future</span>
+          <span class="tag">Project</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+  </section>  <!-- Contact -->  <section id="contact" class="page-section">
     <div class="container">
       <div class="section-title">
         <small>Contact Me</small>
         <h2>যোগাযোগ করুন</h2>
         <p>আপনার কোনো প্রশ্ন থাকলে মেসেজ করতে পারেন</p>
-      </div>
+      </div>  <div class="contact-grid">
 
-      <div class="contact-grid">
-        <div class="glass-card">
-          <h3>Let's Connect 🤝</h3>
-          <p style="margin-bottom: 25px;">
-            নতুন কোনো প্রজেক্ট বা আইডিয়া নিয়ে কথা বলতে চাইলে যোগাযোগ করুন।
+    <div class="glass-card">
+      <h3>Let's Connect 🤝</h3>
+
+      <p style="margin-bottom: 25px;">
+        নতুন কোনো প্রজেক্ট বা আইডিয়া নিয়ে কথা বলতে চাইলে যোগাযোগ করুন।
+      </p>
+
+      <div class="contact-item">
+        <div class="contact-icon">
+          <i class="fas fa-phone"></i>
+        </div>
+
+        <div>
+          <h4>Phone</h4>
+          <p>
+            <a href="tel:09658083118">09658083118</a>
           </p>
+        </div>
+      </div>
 
-          <div class="contact-item">
-            <div class="contact-icon"><i class="fas fa-phone"></i></div>
-            <div>
-              <h4>Phone</h4>
-              <p><a href="tel:09658083118">09658083118</a></p>
-            </div>
-          </div>
-
-          <div class="contact-item">
-            <div class="contact-icon"><i class="fab fa-facebook-f"></i></div>
-            <div>
-              <h4>Facebook</h4>
-              <p><a href="https://www.facebook.com/share/19aAT7vTyc/" target="_blank">Visit my Facebook</a></p>
-            </div>
-          </div>
-
-          <div class="contact-item">
-            <div class="contact-icon"><i class="fab fa-instagram"></i></div>
-            <div>
-              <h4>Instagram</h4>
-              <p><a href="https://www.instagram.com/mahfuzur_rahman_mahfuz_?stkn=dWQyd3llNXNqcnIw" target="_blank">@mahfuzur_rahman_mahfuz_</a></p>
-            </div>
-          </div>
+      <div class="contact-item">
+        <div class="contact-icon">
+          <i class="fab fa-whatsapp"></i>
         </div>
 
-        <div class="glass-card">
-          <form onsubmit="sendMessage(event)">
-            <input type="text" placeholder="আপনার নাম" required>
-            <input type="email" placeholder="আপনার ইমেইল" required>
-            <textarea placeholder="আপনার মেসেজ লিখুন..." required></textarea>
-            <button type="submit" class="btn btn-primary">
-              Send Message <i class="fas fa-paper-plane"></i>
-            </button>
-          </form>
+        <div>
+          <h4>WhatsApp</h4>
+          <p>
+            <a href="https://wa.me/8801799264290" target="_blank" rel="noopener noreferrer">
+              Chat on WhatsApp
+            </a>
+          </p>
+        </div>
+      </div>
+
+      <div class="contact-item">
+        <div class="contact-icon">
+          <i class="fab fa-facebook-f"></i>
+        </div>
+
+        <div>
+          <h4>Facebook</h4>
+          <p>
+            <a href="https://www.facebook.com/share/19aAT7vTyc/"
+               target="_blank"
+               rel="noopener noreferrer">
+              Visit my Facebook
+            </a>
+          </p>
+        </div>
+      </div>
+
+      <div class="contact-item">
+        <div class="contact-icon">
+          <i class="fab fa-instagram"></i>
+        </div>
+
+        <div>
+          <h4>Instagram</h4>
+          <p>
+            <a href="https://www.instagram.com/mahfuzur_rahman_mahfuz_?stkn=dWQyd3llNXNqcnIw"
+               target="_blank"
+               rel="noopener noreferrer">
+              @mahfuzur_rahman_mahfuz_
+            </a>
+          </p>
         </div>
       </div>
     </div>
-  </section>
 
-  <!-- Footer -->
-  <footer>
-    <div class="container">
-      © 2026 Md Mahfuz Rana. All Rights Reserved.
+    <div class="glass-card">
+      <form onsubmit="sendMessage(event)">
+        <input type="text" id="name" placeholder="আপনার নাম" required>
+
+        <input type="email" id="email" placeholder="আপনার ইমেইল" required>
+
+        <textarea id="message" placeholder="আপনার মেসেজ লিখুন..." required></textarea>
+
+        <div class="form-buttons">
+          <button type="submit" class="btn btn-primary">
+            Send Email <i class="fas fa-paper-plane"></i>
+          </button>
+          
+          <button type="button" onclick="sendWhatsApp(event)" class="btn btn-whatsapp">
+            Send WhatsApp <i class="fab fa-whatsapp"></i>
+          </button>
+        </div>
+      </form>
     </div>
-  </footer>
 
-  <script>
+  </div>
+</div>
+
+  </section>  <!-- Footer -->  <footer>
+    <div class="container">
+      © <span id="year"></span> Md Mahfuz Rana. All Rights Reserved.
+    </div>
+  </footer>  <script>
+    // Theme Toggle
     function toggleTheme() {
       document.body.classList.toggle('light');
+
+      const isLight = document.body.classList.contains('light');
       const icon = document.querySelector('#themeBtn i');
-      if (document.body.classList.contains('light')) {
-        icon.className = 'fas fa-moon';
-      } else {
-        icon.className = 'fas fa-sun';
+
+      icon.className = isLight ? 'fas fa-moon' : 'fas fa-sun';
+
+      localStorage.setItem('theme', isLight ? 'light' : 'dark');
+    }
+
+    // Load Saved Theme
+    function loadTheme() {
+      const savedTheme = localStorage.getItem('theme');
+
+      if (savedTheme === 'light') {
+        document.body.classList.add('light');
+        document.querySelector('#themeBtn i').className = 'fas fa-moon';
       }
     }
 
+    // Mobile Menu
     function toggleMenu() {
       document.getElementById('navLinks').classList.toggle('active');
     }
 
-    // Navigation logic to hide/show sections
+    // Navigation
     function navigate(sectionId) {
-      // Hide all sections
       const sections = document.querySelectorAll('.page-section');
-      sections.forEach(sec => sec.classList.remove('active'));
-
-      // Remove active class from all links
       const links = document.querySelectorAll('.nav-links a');
-      links.forEach(link => link.classList.remove('active-link'));
 
-      // Show targeted section
-      document.getElementById(sectionId).classList.add('active');
+      sections.forEach(section => {
+        section.classList.remove('active');
+      });
 
-      // Make clicked link active
-      event.target.classList.add('active-link');
+      links.forEach(link => {
+        link.classList.remove('active-link');
+      });
 
-      // Close mobile menu
+      const targetSection = document.getElementById(sectionId);
+
+      if (targetSection) {
+        targetSection.classList.add('active');
+      }
+
+      const clickedLink = [...links].find(link =>
+        link.getAttribute('onclick')?.includes(`'${sectionId}'`)
+      );
+
+      if (clickedLink) {
+        clickedLink.classList.add('active-link');
+      }
+
       document.getElementById('navLinks').classList.remove('active');
-      
-      // Scroll to top automatically
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
     }
 
+    // Contact Form (Email)
     function sendMessage(event) {
       event.preventDefault();
-      alert('ধন্যবাদ! আপনার মেসেজটি গ্রহণ করা হয়েছে।');
-      event.target.reset();
-    }
-  </script>
 
-</body>
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const message = document.getElementById('message').value.trim();
+
+      const subject = encodeURIComponent('Portfolio Contact Message');
+      const body = encodeURIComponent(
+        `নাম: ${name}\nইমেইল: ${email}\n\nমেসেজ:\n${message}`
+      );
+
+      window.location.href =
+        `mailto:mahfuzrana1177@gmail.com?subject=${subject}&body=${body}`;
+    }
+
+    // WhatsApp Direct Message from Form
+    function sendWhatsApp(event) {
+      event.preventDefault();
+
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const message = document.getElementById('message').value.trim();
+
+      if(!name || !message) {
+        alert('দয়া করে নাম এবং মেসেজ ফিল্ড পূরণ করুন।');
+        return;
+      }
+
+      const text = encodeURIComponent(
+        `নাম: ${name}\nইমেইল: ${email}\n\nমেসেজ:\n${message}`
+      );
+
+      window.open(`https://wa.me/8809658083118?text=${text}`, '_blank');
+    }
+
+    // Current Year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Initialize
+    loadTheme();
+  </script></body>
 </html>
