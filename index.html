@@ -1,1193 +1,1670 @@
-<!DOCTYPE html><html lang="bn">
+<!DOCTYPE html>
+<html lang="bn">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Md Mahfuz Rana - Personal Portfolio">
-  <title>Md Mahfuz Rana | Portfolio</title>  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">  <style>
-    :root {
-      --bg: #070b14;
-      --bg-soft: #0d1424;
-      --card: rgba(17, 27, 46, 0.75);
-      --text: #f1f5f9;
-      --muted: #94a3b8;
-      --primary: #3b82f6;
-      --secondary: #22d3ee;
-      --border: rgba(148, 163, 184, 0.15);
-      --shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-    }
-
-    body.light {
-      --bg: #f1f5f9;
-      --bg-soft: #ffffff;
-      --card: rgba(255, 255, 255, 0.85);
-      --text: #0f172a;
-      --muted: #64748b;
-      --border: rgba(15, 23, 42, 0.1);
-      --shadow: 0 20px 50px rgba(15, 23, 42, 0.08);
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      font-family: 'Poppins', 'Hind Siliguri', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.7;
-      overflow-x: hidden;
-      transition: background 0.3s, color 0.3s;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-    }
-
-    body::before {
-      content: "";
-      position: fixed;
-      width: 500px;
-      height: 500px;
-      background: var(--primary);
-      filter: blur(180px);
-      opacity: 0.12;
-      top: -200px;
-      left: -150px;
-      z-index: -1;
-      pointer-events: none;
-    }
-
-    body::after {
-      content: "";
-      position: fixed;
-      width: 400px;
-      height: 400px;
-      background: var(--secondary);
-      filter: blur(180px);
-      opacity: 0.08;
-      bottom: -200px;
-      right: -100px;
-      z-index: -1;
-      pointer-events: none;
-    }
-
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    button,
-    input,
-    textarea {
-      font-family: inherit;
-    }
-
-    .container {
-      width: min(1120px, 90%);
-      margin: auto;
-    }
-
-    /* Navbar */
-    header {
-      position: fixed;
-      top: 0;
-      width: 100%;
-      z-index: 1000;
-      background: rgba(7, 11, 20, 0.85);
-      backdrop-filter: blur(18px);
-      border-bottom: 1px solid var(--border);
-    }
-
-    body.light header {
-      background: rgba(241, 245, 249, 0.85);
-    }
-
-    nav {
-      height: 75px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .logo {
-      font-size: 24px;
-      font-weight: 800;
-      letter-spacing: -1px;
-    }
-
-    .logo span {
-      color: var(--secondary);
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 30px;
-      list-style: none;
-    }
-
-    .nav-links a {
-      color: var(--muted);
-      font-size: 14px;
-      transition: 0.3s;
-      cursor: pointer;
-    }
-
-    .nav-links a:hover,
-    .nav-links a.active-link {
-      color: var(--secondary);
-    }
-
-    .nav-actions {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .icon-btn {
-      width: 40px;
-      height: 40px;
-      border: 1px solid var(--border);
-      background: var(--card);
-      color: var(--text);
-      border-radius: 10px;
-      cursor: pointer;
-      font-size: 16px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .icon-btn:hover {
-      border-color: var(--secondary);
-      color: var(--secondary);
-    }
-
-    .menu-btn {
-      display: none;
-      border: none;
-      background: transparent;
-      color: var(--text);
-      font-size: 24px;
-      cursor: pointer;
-    }
-
-    /* Section Control */
-    .page-section {
-      display: none;
-      padding: 110px 0 70px;
-      flex: 1;
-      animation: fadeIn 0.4s ease-in-out;
-    }
-
-    .page-section.active {
-      display: block;
-    }
-
-    #home.active {
-      display: flex;
-      align-items: center;
-      min-height: 100vh;
-      padding-top: 75px;
-    }
-
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(15px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    /* Hero */
-    .hero-content {
-      display: grid;
-      grid-template-columns: 1.1fr 0.9fr;
-      align-items: center;
-      gap: 60px;
-      width: 100%;
-    }
-
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 14px;
-      border: 1px solid rgba(34, 211, 238, 0.25);
-      background: rgba(34, 211, 238, 0.06);
-      border-radius: 30px;
-      color: var(--secondary);
-      font-size: 13px;
-      margin-bottom: 22px;
-    }
-
-    .badge i {
-      font-size: 8px;
-    }
-
-    .hero h1 {
-      font-size: clamp(42px, 6vw, 70px);
-      line-height: 1.12;
-      letter-spacing: -3px;
-      margin-bottom: 22px;
-    }
-
-    .hero h1 span {
-      background: linear-gradient(90deg, var(--primary), var(--secondary));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .hero p {
-      color: var(--muted);
-      max-width: 520px;
-      font-size: 16px;
-    }
-
-    /* Profile Card */
-    .profile-wrap {
-      display: flex;
-      justify-content: center;
-    }
-
-    .profile-card {
-      width: 360px;
-      min-height: 430px;
-      border: 1px solid var(--border);
-      border-radius: 25px;
-      background: linear-gradient(145deg, rgba(59, 130, 246, 0.12), var(--card));
-      backdrop-filter: blur(20px);
-      box-shadow: var(--shadow);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      overflow: hidden;
-      padding: 30px 20px;
-    }
-
-    .profile-card::before {
-      content: "";
-      position: absolute;
-      width: 220px;
-      height: 220px;
-      background: var(--primary);
-      filter: blur(90px);
-      opacity: 0.2;
-      pointer-events: none;
-    }
-
-    .profile-img {
-      width: 200px;
-      height: 200px;
-      border-radius: 50%;
-      border: 4px solid rgba(34, 211, 238, 0.6);
-      background: linear-gradient(135deg, #172554, #0f172a);
-      display: block;
-      object-fit: cover;
-      object-position: center;
-      position: relative;
-      z-index: 1;
-      box-shadow: 0 0 35px rgba(34, 211, 238, 0.15);
-    }
-
-    .profile-card h3 {
-      margin-top: 22px;
-      font-size: 22px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .profile-card p {
-      color: var(--secondary);
-      font-size: 13px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .socials {
-      display: flex;
-      gap: 12px;
-      margin-top: 18px;
-      position: relative;
-      z-index: 1;
-    }
-
-    .socials a {
-      width: 38px;
-      height: 38px;
-      border: 1px solid var(--border);
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--muted);
-      font-size: 14px;
-      transition: 0.3s;
-    }
-
-    .socials a:hover {
-      color: var(--secondary);
-      border-color: var(--secondary);
-      transform: translateY(-3px);
-    }
-
-    /* Section Titles */
-    .section-title {
-      text-align: center;
-      margin-bottom: 55px;
-    }
-
-    .section-title small {
-      color: var(--secondary);
-      text-transform: uppercase;
-      letter-spacing: 3px;
-      font-size: 11px;
-      font-weight: 600;
-    }
-
-    .section-title h2 {
-      font-size: 36px;
-      margin-top: 10px;
-      letter-spacing: -1px;
-    }
-
-    .section-title p {
-      color: var(--muted);
-      font-size: 14px;
-      margin-top: 10px;
-    }
-
-    /* Common Card Styles */
-    .glass-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      padding: 30px;
-      backdrop-filter: blur(15px);
-      box-shadow: var(--shadow);
-    }
-
-    .glass-card h3 {
-      font-size: 20px;
-      margin-bottom: 15px;
-    }
-
-    .glass-card p {
-      color: var(--muted);
-      font-size: 14px;
-    }
-
-    /* About */
-    .about-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 25px;
-    }
-
-    .info-list {
-      list-style: none;
-      margin-top: 20px;
-    }
-
-    .info-list li {
-      display: flex;
-      justify-content: space-between;
-      gap: 15px;
-      padding: 12px 0;
-      border-bottom: 1px solid var(--border);
-      font-size: 13px;
-    }
-
-    .info-list li:last-child {
-      border-bottom: none;
-    }
-
-    .info-list span:first-child {
-      color: var(--muted);
-    }
-
-    .info-list span:last-child {
-      color: var(--text);
-      font-weight: 500;
-      text-align: right;
-    }
-
-    /* Skills */
-    .skills-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 18px;
-    }
-
-    .skill-card {
-      text-align: center;
-      padding: 28px 15px;
-      border: 1px solid var(--border);
-      border-radius: 16px;
-      background: var(--card);
-      transition: 0.3s;
-    }
-
-    .skill-card:hover {
-      transform: translateY(-7px);
-      border-color: rgba(34, 211, 238, 0.4);
-    }
-
-    .skill-card i {
-      font-size: 35px;
-      color: var(--secondary);
-      margin-bottom: 15px;
-    }
-
-    .skill-card h4 {
-      font-size: 15px;
-      margin-bottom: 5px;
-    }
-
-    .skill-card p {
-      color: var(--muted);
-      font-size: 12px;
-    }
-
-    /* Projects */
-    .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 22px;
-    }
-
-    .project-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      overflow: hidden;
-      transition: 0.3s;
-    }
-
-    .project-card:hover {
-      transform: translateY(-7px);
-      border-color: rgba(59, 130, 246, 0.4);
-    }
-
-    .project-img {
-      height: 170px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: linear-gradient(135deg, #172554, #0f172a);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .project-img::before {
-      content: "";
-      width: 180px;
-      height: 180px;
-      background: var(--primary);
-      filter: blur(70px);
-      opacity: 0.25;
-      position: absolute;
-    }
-
-    .project-img i {
-      font-size: 55px;
-      color: var(--secondary);
-      position: relative;
-    }
-
-    .project-info {
-      padding: 22px;
-    }
-
-    .project-info h3 {
-      font-size: 18px;
-      margin-bottom: 8px;
-    }
-
-    .project-info p {
-      color: var(--muted);
-      font-size: 13px;
-      margin-bottom: 15px;
-    }
-
-    .tags {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
-
-    .tag {
-      padding: 5px 10px;
-      background: rgba(59, 130, 246, 0.1);
-      color: var(--secondary);
-      border-radius: 5px;
-      font-size: 11px;
-    }
-
-    /* Contact */
-    .contact-grid {
-      display: grid;
-      grid-template-columns: 0.8fr 1.2fr;
-      gap: 25px;
-    }
-
-    .contact-item {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-      margin-bottom: 22px;
-    }
-
-    .contact-icon {
-      width: 45px;
-      height: 45px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 12px;
-      background: rgba(34, 211, 238, 0.08);
-      color: var(--secondary);
-      font-size: 18px;
-      flex-shrink: 0;
-    }
-
-    .contact-item h4 {
-      font-size: 14px;
-    }
-
-    .contact-item p {
-      color: var(--muted);
-      font-size: 13px;
-    }
-
-    .contact-item a:hover {
-      color: var(--secondary);
-    }
-
-    form {
-      display: grid;
-      gap: 15px;
-    }
-
-    input,
-    textarea {
-      width: 100%;
-      padding: 14px 16px;
-      border-radius: 10px;
-      border: 1px solid var(--border);
-      background: var(--bg-soft);
-      color: var(--text);
-      outline: none;
-      font-size: 13px;
-      transition: 0.3s;
-    }
-
-    input:focus,
-    textarea:focus {
-      border-color: var(--secondary);
-    }
-
-    textarea {
-      height: 130px;
-      resize: vertical;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 13px 22px;
-      border-radius: 10px;
-      font-size: 14px;
-      font-weight: 600;
-      transition: 0.3s;
-      cursor: pointer;
-    }
-
-    .btn-primary {
-      color: white;
-      background: linear-gradient(135deg, var(--primary), #2563eb);
-      box-shadow: 0 10px 30px rgba(59, 130, 246, 0.2);
-      border: none;
-      width: fit-content;
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 15px 35px rgba(59, 130, 246, 0.35);
-    }
-
-    .btn-whatsapp {
-      color: white;
-      background: linear-gradient(135deg, #25d366, #128c7e);
-      box-shadow: 0 10px 30px rgba(37, 211, 102, 0.2);
-      border: none;
-      width: fit-content;
-    }
-
-    .btn-whatsapp:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 15px 35px rgba(37, 211, 102, 0.35);
-    }
-
-    .form-buttons {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    /* Footer */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 25px 0;
-      text-align: center;
-      color: var(--muted);
-      font-size: 13px;
-      margin-top: auto;
-    }
-
-    /* Responsive */
-    @media (max-width: 850px) {
-      .hero-content,
-      .about-grid,
-      .contact-grid {
-        grid-template-columns: 1fr;
-      }
-
-      #home.active {
-        padding-top: 100px;
-        padding-bottom: 60px;
-      }
-
-      .hero-content {
-        text-align: center;
-      }
-
-      .hero p {
-        margin-left: auto;
-        margin-right: auto;
-      }
-
-      .profile-wrap {
-        order: -1;
-      }
-
-      .skills-grid {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .projects-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .profile-card {
-        width: 320px;
-        min-height: 390px;
-      }
-
-      .profile-img {
-        width: 180px;
-        height: 180px;
-      }
-
-      .nav-links {
-        position: absolute;
-        top: 75px;
-        left: 0;
-        width: 100%;
-        background: var(--bg-soft);
-        flex-direction: column;
-        padding: 25px;
-        gap: 20px;
-        display: none;
-        border-bottom: 1px solid var(--border);
-        box-shadow: var(--shadow);
-      }
-
-      .nav-links.active {
-        display: flex;
-      }
-
-      .menu-btn {
-        display: block;
-      }
-    }
-
-    @media (max-width: 450px) {
-      .hero h1 {
-        font-size: 38px;
-        letter-spacing: -1.5px;
-      }
-
-      .section-title h2 {
-        font-size: 28px;
-      }
-
-      .skills-grid {
-        gap: 12px;
-      }
-
-      .skill-card {
-        padding: 22px 10px;
-      }
-
-      .glass-card {
-        padding: 22px;
-      }
-
-      .profile-card {
-        width: 100%;
-        max-width: 320px;
-      }
-
-      .profile-img {
-        width: 170px;
-        height: 170px;
-      }
-
-      .info-list li {
-        font-size: 12px;
-      }
-    }
-  </style></head><body>  <!-- Navbar -->  <header>
-    <div class="container">
-      <nav>
-        <a href="#home" class="logo" onclick="navigate('home'); return false;">
-          Mahfuz<span>.</span>
-        </a>    <ul class="nav-links" id="navLinks">
-      <li><a onclick="navigate('home')" class="active-link">Home</a></li>
-      <li><a onclick="navigate('about')">About</a></li>
-      <li><a onclick="navigate('skills')">Skills</a></li>
-      <li><a onclick="navigate('projects')">Projects</a></li>
-      <li><a onclick="navigate('contact')">Contact</a></li>
-    </ul>
-
-    <div class="nav-actions">
-      <button class="icon-btn" id="themeBtn" onclick="toggleTheme()" aria-label="Toggle Theme">
-        <i class="fas fa-sun"></i>
-      </button>
-
-      <button class="menu-btn" onclick="toggleMenu()" aria-label="Toggle Menu">
-        <i class="fas fa-bars"></i>
-      </button>
-    </div>
-  </nav>
-</div>
-
-  </header>  <!-- Home -->  <section class="page-section hero active" id="home">
-    <div class="container">
-      <div class="hero-content">    <div>
-      <div class="badge">
-        <i class="fas fa-circle"></i>
-        Welcome to my portfolio
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Md Mahfuz Rana | Portfolio</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<style>
+:root{
+  --bg:#070b14;
+  --soft:#0d1424;
+  --card:rgba(17,27,46,.78);
+  --text:#f1f5f9;
+  --muted:#94a3b8;
+  --p:#3b82f6;
+  --s:#22d3ee;
+  --border:rgba(148,163,184,.15);
+  --shadow:0 20px 60px #0005;
+}
+
+body.light{
+  --bg:#f1f5f9;
+  --soft:#fff;
+  --card:#ffffffdd;
+  --text:#0f172a;
+  --muted:#64748b;
+  --border:#0f172a1a;
+  --shadow:0 20px 50px #0f172a14;
+}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html{
+  scroll-behavior:smooth;
+}
+
+body{
+  font-family:Poppins,'Hind Siliguri',sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  line-height:1.7;
+  min-height:100vh;
+  transition:.3s;
+}
+
+body:before,
+body:after{
+  content:"";
+  position:fixed;
+  width:400px;
+  height:400px;
+  filter:blur(160px);
+  opacity:.12;
+  z-index:-1;
+  pointer-events:none;
+}
+
+body:before{
+  background:var(--p);
+  top:-180px;
+  left:-120px;
+}
+
+body:after{
+  background:var(--s);
+  right:-120px;
+  bottom:-180px;
+}
+
+a{
+  text-decoration:none;
+  color:inherit;
+}
+
+button,
+input,
+textarea{
+  font:inherit;
+}
+
+.container{
+  width:min(1120px,90%);
+  margin:auto;
+}
+
+header{
+  position:fixed;
+  top:0;
+  width:100%;
+  z-index:20;
+  background:#070b14dd;
+  backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--border);
+}
+
+body.light header{
+  background:#f1f5f9dd;
+}
+
+nav{
+  height:75px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+
+.logo{
+  font-size:24px;
+  font-weight:800;
+  cursor:pointer;
+}
+
+.logo span,
+.nav-links a:hover,
+.nav-links a.active-link{
+  color:var(--s);
+}
+
+.nav-links{
+  display:flex;
+  gap:24px;
+  list-style:none;
+}
+
+.nav-links a{
+  font-size:14px;
+  color:var(--muted);
+  cursor:pointer;
+}
+
+.nav-actions{
+  display:flex;
+  gap:10px;
+}
+
+.icon-btn,
+.menu-btn{
+  width:40px;
+  height:40px;
+  border:1px solid var(--border);
+  background:var(--card);
+  color:var(--text);
+  border-radius:10px;
+  cursor:pointer;
+}
+
+.menu-btn{
+  display:none;
+  background:transparent;
+  border:0;
+  font-size:22px;
+}
+
+.page-section{
+  display:none;
+  padding:110px 0 70px;
+  animation:fade .35s;
+}
+
+.page-section.active{
+  display:block;
+}
+
+#home.active{
+  display:flex;
+  align-items:center;
+  min-height:100vh;
+  padding-top:75px;
+}
+
+@keyframes fade{
+  from{
+    opacity:0;
+    transform:translateY(12px);
+  }
+  to{
+    opacity:1;
+    transform:none;
+  }
+}
+
+.hero-content{
+  display:grid;
+  grid-template-columns:1.1fr .9fr;
+  align-items:center;
+  gap:60px;
+  width:100%;
+}
+
+.badge{
+  display:inline-flex;
+  gap:8px;
+  padding:7px 13px;
+  border:1px solid #22d3ee40;
+  background:#22d3ee0f;
+  border-radius:30px;
+  color:var(--s);
+  font-size:13px;
+  margin-bottom:22px;
+}
+
+.badge i{
+  font-size:8px;
+}
+
+.hero h1{
+  font-size:clamp(40px,6vw,70px);
+  line-height:1.12;
+  letter-spacing:-3px;
+  margin-bottom:20px;
+}
+
+.hero h1 span{
+  background:linear-gradient(90deg,var(--p),var(--s));
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+.hero p{
+  color:var(--muted);
+  max-width:520px;
+}
+
+.profile-wrap{
+  display:flex;
+  justify-content:center;
+}
+
+.profile-card{
+  width:360px;
+  min-height:430px;
+  border:1px solid var(--border);
+  border-radius:25px;
+  background:linear-gradient(145deg,#3b82f620,var(--card));
+  backdrop-filter:blur(20px);
+  box-shadow:var(--shadow);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  padding:30px;
+}
+
+.profile-img{
+  width:200px;
+  height:200px;
+  border-radius:50%;
+  border:4px solid #22d3ee99;
+  object-fit:cover;
+  box-shadow:0 0 35px #22d3ee26;
+}
+
+.profile-card h3{
+  margin-top:22px;
+  font-size:22px;
+}
+
+.profile-card p{
+  color:var(--s);
+  font-size:13px;
+}
+
+.socials{
+  display:flex;
+  gap:12px;
+  margin-top:18px;
+}
+
+.socials a{
+  width:38px;
+  height:38px;
+  border:1px solid var(--border);
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  color:var(--muted);
+}
+
+.socials a:hover{
+  color:var(--s);
+  border-color:var(--s);
+}
+
+.section-title{
+  text-align:center;
+  margin-bottom:45px;
+}
+
+.section-title small{
+  color:var(--s);
+  letter-spacing:3px;
+  font-size:11px;
+}
+
+.section-title h2{
+  font-size:34px;
+  margin-top:8px;
+}
+
+.section-title p,
+.glass-card p{
+  color:var(--muted);
+  font-size:14px;
+}
+
+.glass-card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:28px;
+  backdrop-filter:blur(15px);
+  box-shadow:var(--shadow);
+}
+
+.about-grid,
+.contact-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:24px;
+}
+
+.info-list{
+  list-style:none;
+  margin-top:18px;
+}
+
+.info-list li{
+  display:flex;
+  justify-content:space-between;
+  border-bottom:1px solid var(--border);
+  padding:10px 0;
+  font-size:13px;
+}
+
+.info-list span:first-child{
+  color:var(--muted);
+}
+
+.skills-grid,
+.projects-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:18px;
+}
+
+.skill-card,
+.project-card,
+.gallery-card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:16px;
+  overflow:hidden;
+}
+
+.skill-card{
+  text-align:center;
+  padding:25px 10px;
+}
+
+.skill-card i{
+  font-size:34px;
+  color:var(--s);
+  margin-bottom:12px;
+}
+
+.skill-card p{
+  font-size:12px;
+  color:var(--muted);
+}
+
+.projects-grid{
+  grid-template-columns:repeat(3,1fr);
+}
+
+.project-card{
+  padding:25px;
+}
+
+.project-card i{
+  font-size:45px;
+  color:var(--s);
+  margin-bottom:15px;
+}
+
+.project-card p{
+  font-size:13px;
+  color:var(--muted);
+  margin:8px 0;
+}
+
+.btn{
+  border:0;
+  border-radius:10px;
+  padding:11px 18px;
+  cursor:pointer;
+  color:white;
+  background:linear-gradient(135deg,var(--p),#2563eb);
+  font-size:13px;
+}
+
+.btn-danger{
+  background:#dc2626;
+}
+
+.btn-gray{
+  background:#475569;
+}
+
+.btn-green{
+  background:#059669;
+}
+
+.form-buttons{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+form{
+  display:grid;
+  gap:14px;
+}
+
+input,
+textarea{
+  width:100%;
+  padding:13px 15px;
+  border-radius:10px;
+  border:1px solid var(--border);
+  background:var(--soft);
+  color:var(--text);
+  outline:none;
+}
+
+textarea{
+  height:120px;
+  resize:vertical;
+}
+
+.hidden{
+  display:none!important;
+}
+
+.toolbar{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  justify-content:center;
+  margin-bottom:25px;
+}
+
+.gallery-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:18px;
+}
+
+.gallery-card img{
+  width:100%;
+  height:210px;
+  object-fit:cover;
+  display:block;
+  cursor:pointer;
+}
+
+.gallery-card .card-actions{
+  padding:12px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:8px;
+}
+
+.gallery-card small{
+  color:var(--muted);
+  overflow:hidden;
+  text-overflow:ellipsis;
+  white-space:nowrap;
+}
+
+.note-layout{
+  display:grid;
+  grid-template-columns:260px 1fr;
+  gap:20px;
+}
+
+.folder-list{
+  display:grid;
+  gap:8px;
+  margin-top:15px;
+}
+
+.folder-item{
+  padding:10px 12px;
+  border:1px solid var(--border);
+  border-radius:9px;
+  cursor:pointer;
+  color:var(--muted);
+}
+
+.folder-item.active,
+.folder-item:hover{
+  color:var(--s);
+  border-color:var(--s);
+}
+
+.note-list{
+  display:grid;
+  gap:12px;
+  margin-top:20px;
+}
+
+.note-item{
+  border:1px solid var(--border);
+  border-radius:12px;
+  padding:15px;
+  background:var(--soft);
+}
+
+.note-item h4{
+  margin-bottom:5px;
+}
+
+.note-item p{
+  white-space:pre-wrap;
+  color:var(--muted);
+}
+
+.note-actions{
+  display:flex;
+  gap:8px;
+  margin-top:10px;
+}
+
+.status{
+  margin:12px 0;
+  color:var(--s);
+  font-size:13px;
+}
+
+footer{
+  border-top:1px solid var(--border);
+  padding:25px;
+  text-align:center;
+  color:var(--muted);
+  font-size:13px;
+}
+
+@media(max-width:850px){
+  .hero-content,
+  .about-grid,
+  .contact-grid,
+  .note-layout{
+    grid-template-columns:1fr;
+  }
+
+  .hero-content{
+    text-align:center;
+  }
+
+  .hero p{
+    margin:auto;
+  }
+
+  .profile-wrap{
+    order:-1;
+  }
+
+  .skills-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .projects-grid,
+  .gallery-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .nav-links{
+    display:none;
+    position:absolute;
+    top:75px;
+    left:0;
+    width:100%;
+    background:var(--soft);
+    padding:22px;
+    flex-direction:column;
+    text-align:center;
+  }
+
+  .nav-links.active{
+    display:flex;
+  }
+
+  .menu-btn{
+    display:block;
+  }
+
+  .profile-card{
+    width:320px;
+    min-height:390px;
+  }
+}
+
+@media(max-width:450px){
+  .hero h1{
+    font-size:38px;
+    letter-spacing:-1px;
+  }
+
+  .section-title h2{
+    font-size:27px;
+  }
+
+  .gallery-grid{
+    grid-template-columns:1fr;
+  }
+
+  .glass-card{
+    padding:20px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="container">
+    <nav>
+      <a class="logo" onclick="navigate('home')">
+        Mahfuz<span>.</span>
+      </a>
+
+      <ul class="nav-links" id="navLinks">
+        <li><a onclick="navigate('home')" class="active-link">Home</a></li>
+        <li><a onclick="navigate('about')">About</a></li>
+        <li><a onclick="navigate('skills')">Skills</a></li>
+        <li><a onclick="navigate('projects')">Projects</a></li>
+        <li><a onclick="navigate('gallery')">Gallery</a></li>
+        <li><a onclick="navigate('notes')">Note</a></li>
+        <li><a onclick="navigate('contact')">Contact</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button class="icon-btn" onclick="toggleTheme()">
+          <i id="themeIcon" class="fas fa-sun"></i>
+        </button>
+
+        <button class="menu-btn" onclick="toggleMenu()">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<!-- HOME -->
+<section id="home" class="page-section active">
+  <div class="container">
+    <div class="hero-content">
+
+      <div class="hero">
+        <div class="badge">
+          <i class="fas fa-circle"></i>
+          Welcome to my portfolio
+        </div>
+
+        <h1>
+          Hi, I'm<br>
+          <span>Md Mahfuz Rana</span>
+        </h1>
+
+        <p>
+          Assalamualaikum, আমার ওয়েবসাইটে আপনাকে স্বাগতম।
+        </p>
       </div>
 
-      <h1>
-        Hi, I'm <br>
-        <span>Md Mahfuz Rana</span>
-      </h1>
+      <div class="profile-wrap">
+        <div class="profile-card">
 
-      <p>
-        Assalamualaikum, আমার ওয়েবসাইটে আপনাকে স্বাগতম।
-      </p>
+          <img
+            src="profile.jpg"
+            alt="Md Mahfuz Rana"
+            class="profile-img"
+            onerror="this.style.display='none';document.getElementById('fallback').classList.remove('hidden')"
+          >
+
+          <div id="fallback" class="profile-img hidden" style="display:grid;place-items:center">
+            <i class="fas fa-user"></i>
+          </div>
+
+          <h3>Md Mahfuz Rana</h3>
+          <p>Student</p>
+
+          <div class="socials">
+            <a href="https://www.facebook.com/share/19aAT7vTyc/" target="_blank">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+
+            <a href="https://www.instagram.com/mahfuzur_rahman_mahfuz_?stkn=dWQyd3llNXNqcnIw" target="_blank">
+              <i class="fab fa-instagram"></i>
+            </a>
+
+            <a href="https://wa.me/8801799264290" target="_blank">
+              <i class="fab fa-whatsapp"></i>
+            </a>
+
+            <a href="tel:09658083118">
+              <i class="fas fa-phone"></i>
+            </a>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about" class="page-section">
+  <div class="container">
+
+    <div class="section-title">
+      <small>About Me</small>
+      <h2>নিজের সম্পর্কে কিছু কথা</h2>
+      <p>আমার পরিচয় ও বর্তমান লক্ষ্য</p>
     </div>
 
-    <div class="profile-wrap">
-      <div class="profile-card">
+    <div class="about-grid">
 
-        <img
-          src="profile.jpg"
-          alt="Md Mahfuz Rana"
-          class="profile-img"
-          onerror="this.style.display='none'; document.getElementById('photoFallback').style.display='flex';"
+      <div class="glass-card">
+        <h3>আমি কে? 👋</h3>
+
+        <p>
+          আমি Md Mahfuz Rana। আমি একজন শিক্ষার্থী এবং ওয়েব ডিজাইন ও প্রযুক্তির প্রতি আগ্রহী।
+          নতুন কিছু শেখা, সুন্দর ডিজাইন তৈরি করা এবং নিজের দক্ষতা বাড়ানো আমার লক্ষ্য।
+        </p>
+
+        <p style="margin-top:15px">
+          ভবিষ্যতে একজন দক্ষ ওয়েব ডেভেলপার হিসেবে কাজ করতে চাই।
+        </p>
+      </div>
+
+      <div class="glass-card">
+        <h3>Personal Info</h3>
+
+        <ul class="info-list">
+          <li>
+            <span>Name</span>
+            <span>Md Mahfuz Rana</span>
+          </li>
+
+          <li>
+            <span>Profession</span>
+            <span>Student</span>
+          </li>
+
+          <li>
+            <span>Location</span>
+            <span>Bangladesh</span>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" class="page-section">
+  <div class="container">
+
+    <div class="section-title">
+      <small>My Skills</small>
+      <h2>আমার দক্ষতা</h2>
+      <p>যেসব বিষয়ে আমি আগ্রহী</p>
+    </div>
+
+    <div class="skills-grid">
+
+      <div class="skill-card">
+        <i class="fab fa-html5"></i>
+        <h3>HTML</h3>
+        <p>ওয়েব পেজ তৈরি</p>
+      </div>
+
+      <div class="skill-card">
+        <i class="fab fa-css3-alt"></i>
+        <h3>CSS</h3>
+        <p>ডিজাইন ও স্টাইলিং</p>
+      </div>
+
+      <div class="skill-card">
+        <i class="fab fa-js"></i>
+        <h3>JavaScript</h3>
+        <p>ওয়েবসাইটে ইন্টার‌্যাকশন</p>
+      </div>
+
+      <div class="skill-card">
+        <i class="fas fa-fire"></i>
+        <h3>Firebase</h3>
+        <p>ডেটা ও Authentication</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" class="page-section">
+  <div class="container">
+
+    <div class="section-title">
+      <small>My Projects</small>
+      <h2>আমার প্রজেক্ট</h2>
+      <p>আমার তৈরি করা কাজগুলো</p>
+    </div>
+
+    <div class="projects-grid">
+
+      <div class="project-card">
+        <i class="fas fa-globe"></i>
+        <h3>Personal Portfolio</h3>
+        <p>নিজের পরিচয় ও কাজের জন্য তৈরি করা ওয়েবসাইট।</p>
+      </div>
+
+      <div class="project-card">
+        <i class="fas fa-images"></i>
+        <h3>Gallery System</h3>
+        <p>Firebase ব্যবহার করে ছবি আপলোড ও সংরক্ষণ ব্যবস্থা।</p>
+      </div>
+
+      <div class="project-card">
+        <i class="fas fa-book"></i>
+        <h3>Private Note</h3>
+        <p>Admin Login-এর মাধ্যমে ব্যক্তিগত নোট সংরক্ষণ ব্যবস্থা।</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery" class="page-section">
+  <div class="container">
+
+    <div class="section-title">
+      <small>My Gallery</small>
+      <h2>ছবির গ্যালারি</h2>
+      <p>Firebase Storage-এ সংরক্ষিত ছবি</p>
+    </div>
+
+    <div class="toolbar">
+      <button
+        class="btn btn-green hidden"
+        id="galleryUploadBtn"
+        onclick="document.getElementById('imageInput').click()"
+      >
+        <i class="fas fa-upload"></i>
+        ছবি আপলোড
+      </button>
+
+      <button
+        class="btn btn-gray hidden"
+        id="logoutBtn"
+        onclick="logout()"
+      >
+        Logout
+      </button>
+    </div>
+
+    <input
+      id="imageInput"
+      class="hidden"
+      type="file"
+      accept="image/*"
+      multiple
+      onchange="uploadImages(event)"
+    >
+
+    <div id="galleryStatus" class="status"></div>
+    <div id="galleryGrid" class="gallery-grid"></div>
+
+  </div>
+</section>
+
+<!-- NOTES -->
+<section id="notes" class="page-section">
+  <div class="container">
+
+    <div class="section-title">
+      <small>Private Notes</small>
+      <h2>ব্যক্তিগত নোট</h2>
+      <p>শুধু Admin account দিয়ে প্রবেশ করা যাবে</p>
+    </div>
+
+    <!-- LOGIN BOX -->
+    <div
+      id="loginBox"
+      class="glass-card"
+      style="max-width:500px;margin:auto"
+    >
+      <h3>
+        <i class="fas fa-lock"></i>
+        Note Login
+      </h3>
+
+      <form onsubmit="login(event)">
+        <input
+          id="loginEmail"
+          type="email"
+          value="mahfuzrana1177@gmail.com"
+          readonly
         >
 
-        <div id="photoFallback" class="profile-img" style="display:none;">
-          <i class="fas fa-user"></i>
-        </div>
+        <input
+          id="loginPassword"
+          type="password"
+          placeholder="Firebase Password"
+          required
+        >
 
-        <h3>Md Mahfuz Rana</h3>
-        <p>Student</p>
-
-        <div class="socials">
-          <a href="https://www.facebook.com/share/19aAT7vTyc/"
-             target="_blank"
-             rel="noopener noreferrer"
-             aria-label="Facebook">
-            <i class="fab fa-facebook-f"></i>
-          </a>
-
-          <a href="https://www.instagram.com/mahfuzur_rahman_mahfuz_?stkn=dWQyd3llNXNqcnIw"
-             target="_blank"
-             rel="noopener noreferrer"
-             aria-label="Instagram">
-            <i class="fab fa-instagram"></i>
-          </a>
-
-          <a href="https://wa.me/8801799264290"
-             target="_blank"
-             rel="noopener noreferrer"
-             aria-label="WhatsApp">
-            <i class="fab fa-whatsapp"></i>
-          </a>
-
-          <a href="tel:09658083118" aria-label="Phone">
-            <i class="fas fa-phone"></i>
-          </a>
-        </div>
-
-      </div>
-    </div>
-
-  </div>
-</div>
-
-  </section>  <!-- About -->  <section id="about" class="page-section">
-    <div class="container">
-      <div class="section-title">
-        <small>About Me</small>
-        <h2>নিজের সম্পর্কে কিছু কথা</h2>
-        <p>আমার পরিচয় ও বর্তমান লক্ষ্য</p>
-      </div>  <div class="about-grid">
-    <div class="glass-card">
-      <h3>আমি কে? 👋</h3>
-      <p>
-        আমি Md Mahfuz Rana। আমি একজন শিক্ষার্থী এবং ওয়েব ডিজাইন ও
-        প্রযুক্তির প্রতি আগ্রহী। নতুন কিছু শেখা, সুন্দর ডিজাইন তৈরি করা
-        এবং নিজের দক্ষতা বাড়ানো আমার লক্ষ্য।
-      </p>
-
-      <p style="margin-top: 15px;">
-        ভবিষ্যতে একজন দক্ষ ওয়েব ডেভেলপার হিসেবে কাজ করতে চাই।
-      </p>
-    </div>
-
-    <div class="glass-card">
-      <h3>Personal Info</h3>
-
-      <ul class="info-list">
-        <li><span>Name</span><span>Md Mahfuz Rana</span></li>
-        <li><span>Profession</span><span>Student</span></li>
-        <li><span>Location</span><span>Bangladesh</span></li>
-        <li><span>Interest</span><span>Editor</span></li>
-        <li><span>Goal</span><span>Editor</span></li>
-      </ul>
-    </div>
-  </div>
-</div>
-
-  </section>  <!-- Skills -->  <section id="skills" class="page-section">
-    <div class="container">
-      <div class="section-title">
-        <small>My Skills</small>
-        <h2>যে বিষয়গুলো শিখছি</h2>
-        <p>ধীরে ধীরে নিজের দক্ষতা বাড়াচ্ছি</p>
-      </div>  <div class="skills-grid">
-    <div class="skill-card">
-      <i class="fab fa-html5"></i>
-      <h4>HTML</h4>
-      <p>Web Structure</p>
-    </div>
-
-    <div class="skill-card">
-      <i class="fab fa-css3-alt"></i>
-      <h4>CSS</h4>
-      <p>Web Styling</p>
-    </div>
-
-    <div class="skill-card">
-      <i class="fab fa-js"></i>
-      <h4>JavaScript</h4>
-      <p>Web Interaction</p>
-    </div>
-
-    <div class="skill-card">
-      <i class="fas fa-palette"></i>
-      <h4>UI Design</h4>
-      <p>Creative Design</p>
-    </div>
-  </div>
-</div>
-
-  </section>  <!-- Projects -->  <section id="projects" class="page-section">
-    <div class="container">
-      <div class="section-title">
-        <small>My Projects</small>
-        <h2>আমার প্রজেক্টসমূহ</h2>
-        <p>আমার তৈরি করা কাজগুলো</p>
-      </div>  <div class="projects-grid">
-    <div class="project-card">
-      <div class="project-img">
-        <i class="fas fa-user-circle"></i>
-      </div>
-
-      <div class="project-info">
-        <h3>Personal Portfolio</h3>
-        <p>নিজের পরিচয় ও কাজ প্রদর্শনের জন্য একটি আধুনিক ওয়েবসাইট।</p>
-
-        <div class="tags">
-          <span class="tag">HTML</span>
-          <span class="tag">CSS</span>
-          <span class="tag">JavaScript</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="project-card">
-      <div class="project-img">
-        <i class="fas fa-graduation-cap"></i>
-      </div>
-
-      <div class="project-info">
-        <h3>Student Portal</h3>
-        <p>শিক্ষার্থীদের তথ্য ও প্রয়োজনীয় লিংক প্রদর্শনের একটি ডিজাইন।</p>
-
-        <div class="tags">
-          <span class="tag">HTML</span>
-          <span class="tag">CSS</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="project-card">
-      <div class="project-img">
-        <i class="fas fa-laptop-code"></i>
-      </div>
-
-      <div class="project-info">
-        <h3>Coming Soon</h3>
-        <p>ভবিষ্যতে তৈরি করা নতুন প্রজেক্ট এখানে যুক্ত করা হবে।</p>
-
-        <div class="tags">
-          <span class="tag">Future</span>
-          <span class="tag">Project</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-  </section>  <!-- Contact -->  <section id="contact" class="page-section">
-    <div class="container">
-      <div class="section-title">
-        <small>Contact Me</small>
-        <h2>যোগাযোগ করুন</h2>
-        <p>আপনার কোনো প্রশ্ন থাকলে মেসেজ করতে পারেন</p>
-      </div>  <div class="contact-grid">
-
-    <div class="glass-card">
-      <h3>Let's Connect 🤝</h3>
-
-      <p style="margin-bottom: 25px;">
-        নতুন কোনো প্রজেক্ট বা আইডিয়া নিয়ে কথা বলতে চাইলে যোগাযোগ করুন।
-      </p>
-
-      <div class="contact-item">
-        <div class="contact-icon">
-          <i class="fas fa-phone"></i>
-        </div>
-
-        <div>
-          <h4>Phone</h4>
-          <p>
-            <a href="tel:09658083118">09658083118</a>
-          </p>
-        </div>
-      </div>
-
-      <div class="contact-item">
-        <div class="contact-icon">
-          <i class="fab fa-whatsapp"></i>
-        </div>
-
-        <div>
-          <h4>WhatsApp</h4>
-          <p>
-            <a href="https://wa.me/8801799264290" target="_blank" rel="noopener noreferrer">
-              Chat on WhatsApp
-            </a>
-          </p>
-        </div>
-      </div>
-
-      <div class="contact-item">
-        <div class="contact-icon">
-          <i class="fab fa-facebook-f"></i>
-        </div>
-
-        <div>
-          <h4>Facebook</h4>
-          <p>
-            <a href="https://www.facebook.com/share/19aAT7vTyc/"
-               target="_blank"
-               rel="noopener noreferrer">
-              Visit my Facebook
-            </a>
-          </p>
-        </div>
-      </div>
-
-      <div class="contact-item">
-        <div class="contact-icon">
-          <i class="fab fa-instagram"></i>
-        </div>
-
-        <div>
-          <h4>Instagram</h4>
-          <p>
-            <a href="https://www.instagram.com/mahfuzur_rahman_mahfuz_?stkn=dWQyd3llNXNqcnIw"
-               target="_blank"
-               rel="noopener noreferrer">
-              @mahfuzur_rahman_mahfuz_
-            </a>
-          </p>
-        </div>
-      </div>
-    </div>
-
-    <div class="glass-card">
-      <form onsubmit="sendMessage(event)">
-        <input type="text" id="name" placeholder="আপনার নাম" required>
-
-        <input type="email" id="email" placeholder="আপনার ইমেইল" required>
-
-        <textarea id="message" placeholder="আপনার মেসেজ লিখুন..." required></textarea>
-
-        <div class="form-buttons">
-          <button type="submit" class="btn btn-primary">
-            Send Email <i class="fas fa-paper-plane"></i>
-          </button>
-          
-          <button type="button" onclick="sendWhatsApp(event)" class="btn btn-whatsapp">
-            Send WhatsApp <i class="fab fa-whatsapp"></i>
-          </button>
-        </div>
+        <button class="btn" type="submit">
+          Login
+        </button>
       </form>
+
+      <div id="loginStatus" class="status"></div>
+    </div>
+
+    <!-- NOTES APP -->
+    <div id="notesApp" class="hidden">
+
+      <div class="toolbar">
+        <button class="btn" onclick="newFolder()">
+          <i class="fas fa-folder-plus"></i>
+          Folder তৈরি
+        </button>
+
+        <button class="btn" onclick="newNote()">
+          <i class="fas fa-plus"></i>
+          Note লিখুন
+        </button>
+
+        <button class="btn btn-gray" onclick="logout()">
+          Logout
+        </button>
+      </div>
+
+      <div class="note-layout">
+
+        <div class="glass-card">
+          <h3>Folders</h3>
+          <div id="folderList" class="folder-list"></div>
+        </div>
+
+        <div class="glass-card">
+          <h3 id="selectedFolderTitle">Notes</h3>
+          <div id="noteList" class="note-list"></div>
+        </div>
+
+      </div>
     </div>
 
   </div>
-</div>
+</section>
 
-  </section>  <!-- Footer -->  <footer>
-    <div class="container">
-      © <span id="year"></span> Md Mahfuz Rana. All Rights Reserved.
+<!-- CONTACT -->
+<section id="contact" class="page-section">
+  <div class="container">
+
+    <div class="section-title">
+      <small>Contact Me</small>
+      <h2>যোগাযোগ করুন</h2>
+      <p>আপনার কোনো প্রশ্ন থাকলে মেসেজ করতে পারেন</p>
     </div>
-  </footer>  <script>
-    // Theme Toggle
-    function toggleTheme() {
-      document.body.classList.toggle('light');
 
-      const isLight = document.body.classList.contains('light');
-      const icon = document.querySelector('#themeBtn i');
+    <div class="contact-grid">
 
-      icon.className = isLight ? 'fas fa-moon' : 'fas fa-sun';
+      <div class="glass-card">
+        <h3>Let's Connect 🤝</h3>
 
-      localStorage.setItem('theme', isLight ? 'light' : 'dark');
+        <p style="margin:15px 0">
+          নতুন কোনো প্রজেক্ট বা আইডিয়া নিয়ে কথা বলতে চাইলে যোগাযোগ করুন।
+        </p>
+
+        <p>
+          <i class="fas fa-phone"></i>
+          <a href="tel:09658083118">09658083118</a>
+        </p>
+
+        <p>
+          <i class="fab fa-whatsapp"></i>
+          <a href="https://wa.me/8801799264290" target="_blank">
+            Chat on WhatsApp
+          </a>
+        </p>
+
+        <p>
+          <i class="fas fa-envelope"></i>
+          mahfuzrana1177@gmail.com
+        </p>
+      </div>
+
+      <div class="glass-card">
+        <form onsubmit="sendMessage(event)">
+
+          <input
+            id="contactName"
+            placeholder="আপনার নাম"
+            required
+          >
+
+          <input
+            id="contactEmail"
+            type="email"
+            placeholder="আপনার ইমেইল"
+            required
+          >
+
+          <textarea
+            id="contactMessage"
+            placeholder="আপনার মেসেজ লিখুন..."
+            required
+          ></textarea>
+
+          <div class="form-buttons">
+            <button class="btn" type="submit">
+              Send Email
+            </button>
+
+            <button
+              class="btn btn-green"
+              type="button"
+              onclick="sendWhatsApp()"
+            >
+              Send WhatsApp
+            </button>
+          </div>
+
+        </form>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<footer>
+  © <span id="year"></span> Md Mahfuz Rana. All Rights Reserved.
+</footer>
+
+<script type="module">
+
+import {
+  initializeApp
+} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-app.js";
+
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+  signOut
+} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-auth.js";
+
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  getDocs,
+  deleteDoc,
+  doc,
+  query,
+  orderBy,
+  serverTimestamp,
+  updateDoc
+} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
+
+import {
+  getStorage,
+  ref,
+  uploadBytes,
+  getDownloadURL,
+  deleteObject
+} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-storage.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyADuVB9UNyHmoid8POHMw6_11JEpM_9ek8",
+  authDomain: "mahfuz-gallery.firebaseapp.com",
+  projectId: "mahfuz-gallery",
+  storageBucket: "mahfuz-gallery.firebasestorage.app",
+  messagingSenderId: "549128811657",
+  appId: "1:549128811657:web:006ddcc3a44bd05917c258",
+  measurementId: "G-C3312FZ7MZ"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+const storage = getStorage(app);
+
+const ADMIN = "mahfuzrana1177@gmail.com";
+
+let currentUser = null;
+let selectedFolder = null;
+
+/* NAVIGATION */
+window.navigate = function(id){
+
+  document.querySelectorAll(".page-section")
+    .forEach(section => section.classList.remove("active"));
+
+  document.getElementById(id).classList.add("active");
+
+  document.querySelectorAll(".nav-links a")
+    .forEach(link => link.classList.remove("active-link"));
+
+  const activeLink = [
+    ...document.querySelectorAll(".nav-links a")
+  ].find(link =>
+    link.getAttribute("onclick")?.includes("'" + id + "'")
+  );
+
+  if(activeLink){
+    activeLink.classList.add("active-link");
+  }
+
+  document.getElementById("navLinks").classList.remove("active");
+
+  window.scrollTo(0,0);
+
+  if(id === "gallery"){
+    loadGallery();
+  }
+
+  if(id === "notes" && currentUser){
+    loadFolders();
+  }
+};
+
+/* MOBILE MENU */
+window.toggleMenu = function(){
+  document.getElementById("navLinks").classList.toggle("active");
+};
+
+/* THEME */
+window.toggleTheme = function(){
+
+  document.body.classList.toggle("light");
+
+  localStorage.theme =
+    document.body.classList.contains("light")
+      ? "light"
+      : "dark";
+
+  document.getElementById("themeIcon").className =
+    document.body.classList.contains("light")
+      ? "fas fa-moon"
+      : "fas fa-sun";
+};
+
+if(localStorage.theme === "light"){
+  toggleTheme();
+}
+
+/* AUTH STATE */
+onAuthStateChanged(auth, user => {
+
+  currentUser = user?.email === ADMIN ? user : null;
+
+  document
+    .getElementById("galleryUploadBtn")
+    .classList.toggle("hidden", !currentUser);
+
+  document
+    .getElementById("logoutBtn")
+    .classList.toggle("hidden", !currentUser);
+
+  document
+    .getElementById("loginBox")
+    .classList.toggle("hidden", !!currentUser);
+
+  document
+    .getElementById("notesApp")
+    .classList.toggle("hidden", !currentUser);
+
+  if(currentUser){
+    loadFolders();
+  }
+});
+
+/* LOGIN */
+window.login = async function(event){
+
+  event.preventDefault();
+
+  const status = document.getElementById("loginStatus");
+  const password = document.getElementById("loginPassword").value;
+
+  try{
+
+    await signInWithEmailAndPassword(
+      auth,
+      ADMIN,
+      password
+    );
+
+    status.textContent = "সফলভাবে Login হয়েছে।";
+
+  }catch(error){
+
+    status.textContent =
+      "পাসওয়ার্ড ভুল অথবা Login ব্যর্থ হয়েছে।";
+
+  }
+};
+
+/* LOGOUT */
+window.logout = function(){
+  signOut(auth);
+};
+
+/* LOAD GALLERY */
+async function loadGallery(){
+
+  const grid = document.getElementById("galleryGrid");
+
+  grid.innerHTML = "<p>ছবি লোড হচ্ছে...</p>";
+
+  try{
+
+    const snapshot = await getDocs(
+      query(
+        collection(db,"gallery"),
+        orderBy("createdAt","desc")
+      )
+    );
+
+    grid.innerHTML = "";
+
+    if(snapshot.empty){
+      grid.innerHTML =
+        "<p style='color:var(--muted)'>এখনও কোনো ছবি আপলোড করা হয়নি।</p>";
+      return;
     }
 
-    // Load Saved Theme
-    function loadTheme() {
-      const savedTheme = localStorage.getItem('theme');
+    snapshot.forEach(item => {
 
-      if (savedTheme === 'light') {
-        document.body.classList.add('light');
-        document.querySelector('#themeBtn i').className = 'fas fa-moon';
+      const data = item.data();
+
+      const card = document.createElement("div");
+      card.className = "gallery-card";
+
+      const image = document.createElement("img");
+      image.src = data.url;
+      image.alt = data.name || "Gallery Image";
+
+      image.onclick = () => {
+        window.open(data.url, "_blank");
+      };
+
+      const actions = document.createElement("div");
+      actions.className = "card-actions";
+
+      const name = document.createElement("small");
+      name.textContent = data.name || "Image";
+
+      actions.appendChild(name);
+
+      if(currentUser){
+
+        const deleteButton = document.createElement("button");
+        deleteButton.className = "btn btn-danger";
+        deleteButton.innerHTML =
+          '<i class="fas fa-trash"></i>';
+
+        deleteButton.onclick = () => {
+          deleteImage(item.id, data.path);
+        };
+
+        actions.appendChild(deleteButton);
       }
-    }
 
-    // Mobile Menu
-    function toggleMenu() {
-      document.getElementById('navLinks').classList.toggle('active');
-    }
+      card.appendChild(image);
+      card.appendChild(actions);
+      grid.appendChild(card);
 
-    // Navigation
-    function navigate(sectionId) {
-      const sections = document.querySelectorAll('.page-section');
-      const links = document.querySelectorAll('.nav-links a');
+    });
 
-      sections.forEach(section => {
-        section.classList.remove('active');
+  }catch(error){
+
+    grid.innerHTML =
+      "<p style='color:#f87171'>ছবি লোড করা যাচ্ছে না। Firebase Rules চেক করুন।</p>";
+
+    console.error(error);
+  }
+}
+
+/* UPLOAD IMAGES */
+window.uploadImages = async function(event){
+
+  if(!currentUser){
+    alert("আগে Admin Login করুন।");
+    return;
+  }
+
+  const status = document.getElementById("galleryStatus");
+
+  for(const file of event.target.files){
+
+    try{
+
+      status.textContent =
+        file.name + " আপলোড হচ্ছে...";
+
+      const safeName =
+        file.name.replace(/[^\w.-]/g,"_");
+
+      const path =
+        "gallery/" + Date.now() + "_" + safeName;
+
+      const storageRef = ref(storage,path);
+
+      await uploadBytes(storageRef,file);
+
+      const url = await getDownloadURL(storageRef);
+
+      await addDoc(collection(db,"gallery"),{
+        name:file.name,
+        url:url,
+        path:path,
+        createdAt:serverTimestamp(),
+        uploadedBy:currentUser.email
       });
 
-      links.forEach(link => {
-        link.classList.remove('active-link');
-      });
+    }catch(error){
 
-      const targetSection = document.getElementById(sectionId);
+      console.error(error);
 
-      if (targetSection) {
-        targetSection.classList.add('active');
-      }
+      status.textContent =
+        "ছবি আপলোড করতে সমস্যা হয়েছে।";
 
-      const clickedLink = [...links].find(link =>
-        link.getAttribute('onclick')?.includes(`'${sectionId}'`)
-      );
+    }
+  }
 
-      if (clickedLink) {
-        clickedLink.classList.add('active-link');
-      }
+  status.textContent = "সব ছবি আপলোড হয়েছে।";
+  event.target.value = "";
 
-      document.getElementById('navLinks').classList.remove('active');
+  loadGallery();
+};
 
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
+/* DELETE IMAGE */
+window.deleteImage = async function(id,path){
+
+  if(
+    !currentUser ||
+    !confirm("ছবিটি ডিলেট করবেন?")
+  ){
+    return;
+  }
+
+  try{
+
+    await deleteDoc(doc(db,"gallery",id));
+
+    try{
+      await deleteObject(ref(storage,path));
+    }catch(error){
+      console.log("Storage file not found");
     }
 
-    // Contact Form (Email)
-    function sendMessage(event) {
-      event.preventDefault();
+    loadGallery();
 
-      const name = document.getElementById('name').value.trim();
-      const email = document.getElementById('email').value.trim();
-      const message = document.getElementById('message').value.trim();
+  }catch(error){
 
-      const subject = encodeURIComponent('Portfolio Contact Message');
-      const body = encodeURIComponent(
-        `নাম: ${name}\nইমেইল: ${email}\n\nমেসেজ:\n${message}`
-      );
+    alert("ছবি ডিলেট করা যায়নি।");
+    console.error(error);
 
-      window.location.href =
-        `mailto:mahfuzrana1177@gmail.com?subject=${subject}&body=${body}`;
+  }
+};
+
+/* LOAD FOLDERS */
+async function loadFolders(){
+
+  const list = document.getElementById("folderList");
+
+  list.innerHTML = "";
+
+  const snapshot = await getDocs(
+    collection(db,"noteFolders")
+  );
+
+  if(!selectedFolder && snapshot.docs[0]){
+    selectedFolder = snapshot.docs[0].id;
+  }
+
+  snapshot.forEach(item => {
+
+    const data = item.data();
+
+    const folder = document.createElement("div");
+
+    folder.className =
+      "folder-item " +
+      (item.id === selectedFolder ? "active" : "");
+
+    folder.textContent = "📁 " + data.name;
+
+    folder.onclick = () => {
+      selectedFolder = item.id;
+      loadFolders();
+    };
+
+    list.appendChild(folder);
+
+  });
+
+  if(snapshot.empty){
+
+    list.innerHTML =
+      "<p style='color:var(--muted)'>কোনো Folder নেই।</p>";
+
+    document.getElementById("noteList").innerHTML = "";
+
+    return;
+  }
+
+  const selected = snapshot.docs.find(
+    item => item.id === selectedFolder
+  );
+
+  document.getElementById("selectedFolderTitle").textContent =
+    selected ? selected.data().name : "Notes";
+
+  loadNotes();
+}
+
+/* CREATE FOLDER */
+window.newFolder = async function(){
+
+  const name = prompt("Folder-এর নাম লিখুন:");
+
+  if(!name || !name.trim()){
+    return;
+  }
+
+  const folder = await addDoc(
+    collection(db,"noteFolders"),
+    {
+      name:name.trim(),
+      createdAt:serverTimestamp()
+    }
+  );
+
+  selectedFolder = folder.id;
+
+  loadFolders();
+};
+
+/* LOAD NOTES */
+async function loadNotes(){
+
+  const list = document.getElementById("noteList");
+
+  list.innerHTML = "";
+
+  const snapshot = await getDocs(
+    collection(db,"notes")
+  );
+
+  let found = false;
+
+  snapshot.forEach(item => {
+
+    const data = item.data();
+
+    if(data.folderId !== selectedFolder){
+      return;
     }
 
-    // WhatsApp Direct Message from Form
-    function sendWhatsApp(event) {
-      event.preventDefault();
+    found = true;
 
-      const name = document.getElementById('name').value.trim();
-      const email = document.getElementById('email').value.trim();
-      const message = document.getElementById('message').value.trim();
+    const note = document.createElement("div");
+    note.className = "note-item";
 
-      if(!name || !message) {
-        alert('দয়া করে নাম এবং মেসেজ ফিল্ড পূরণ করুন।');
-        return;
-      }
+    const title = document.createElement("h4");
+    title.textContent = data.title;
 
-      const text = encodeURIComponent(
-        `নাম: ${name}\nইমেইল: ${email}\n\nমেসেজ:\n${message}`
-      );
+    const content = document.createElement("p");
+    content.textContent = data.content;
 
-      window.open(`https://wa.me/8809658083118?text=${text}`, '_blank');
+    const actions = document.createElement("div");
+    actions.className = "note-actions";
+
+    const editButton = document.createElement("button");
+    editButton.className = "btn";
+    editButton.textContent = "Edit";
+
+    editButton.onclick = () => {
+      editNote(item.id,data.title,data.content);
+    };
+
+    const deleteButton = document.createElement("button");
+    deleteButton.className = "btn btn-danger";
+    deleteButton.textContent = "Delete";
+
+    deleteButton.onclick = () => {
+      removeNote(item.id);
+    };
+
+    actions.appendChild(editButton);
+    actions.appendChild(deleteButton);
+
+    note.appendChild(title);
+    note.appendChild(content);
+    note.appendChild(actions);
+
+    list.appendChild(note);
+
+  });
+
+  if(!found){
+
+    list.innerHTML =
+      "<p style='color:var(--muted)'>এই Folder-এ কোনো Note নেই।</p>";
+
+  }
+}
+
+/* CREATE NOTE */
+window.newNote = async function(){
+
+  if(!selectedFolder){
+    alert("আগে একটি Folder তৈরি করুন।");
+    return;
+  }
+
+  const title = prompt("Note-এর শিরোনাম:");
+
+  if(!title){
+    return;
+  }
+
+  const content = prompt("Note লিখুন:");
+
+  if(content === null){
+    return;
+  }
+
+  await addDoc(
+    collection(db,"notes"),
+    {
+      folderId:selectedFolder,
+      title:title,
+      content:content,
+      createdAt:serverTimestamp(),
+      owner:currentUser.email
     }
+  );
 
-    // Current Year
-    document.getElementById('year').textContent = new Date().getFullYear();
+  loadNotes();
+};
 
-    // Initialize
-    loadTheme();
-  </script></body>
+/* EDIT NOTE */
+window.editNote = async function(id,title,content){
+
+  const newTitle = prompt(
+    "শিরোনাম:",
+    title
+  );
+
+  if(!newTitle){
+    return;
+  }
+
+  const newContent = prompt(
+    "Note:",
+    content
+  );
+
+  if(newContent === null){
+    return;
+  }
+
+  await updateDoc(
+    doc(db,"notes",id),
+    {
+      title:newTitle,
+      content:newContent
+    }
+  );
+
+  loadNotes();
+};
+
+/* DELETE NOTE */
+window.removeNote = async function(id){
+
+  if(!confirm("Note ডিলেট করবেন?")){
+    return;
+  }
+
+  await deleteDoc(
+    doc(db,"notes",id)
+  );
+
+  loadNotes();
+};
+
+/* SEND EMAIL */
+window.sendMessage = function(event){
+
+  event.preventDefault();
+
+  const name =
+    document.getElementById("contactName").value;
+
+  const email =
+    document.getElementById("contactEmail").value;
+
+  const message =
+    document.getElementById("contactMessage").value;
+
+  const body = encodeURIComponent(
+    `নাম: ${name}\nইমেইল: ${email}\n\nমেসেজ:\n${message}`
+  );
+
+  location.href =
+    `mailto:mahfuzrana1177@gmail.com?subject=Portfolio Contact&body=${body}`;
+};
+
+/* SEND WHATSAPP */
+window.sendWhatsApp = function(){
+
+  const name =
+    document.getElementById("contactName").value;
+
+  const email =
+    document.getElementById("contactEmail").value;
+
+  const message =
+    document.getElementById("contactMessage").value;
+
+  const body = encodeURIComponent(
+    `নাম: ${name}\nইমেইল: ${email}\n\nমেসেজ:\n${message}`
+  );
+
+  window.open(
+    "https://wa.me/8801799264290?text=" + body,
+    "_blank"
+  );
+};
+
+document.getElementById("year").textContent =
+  new Date().getFullYear();
+
+loadGallery();
+
+</script>
+
+</body>
 </html>
