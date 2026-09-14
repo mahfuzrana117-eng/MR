@@ -836,7 +836,7 @@ footer{
       <div class="project-card">
         <i class="fas fa-images"></i>
         <h3>Gallery System</h3>
-        <p>Firebase ব্যবহার করে ছবি আপলোড ও সংরক্ষণ ব্যবস্থা।</p>
+        <p>Cloudinary ও Firebase ব্যবহার করে ছবি আপলোড ও সংরক্ষণ ব্যবস্থা।</p>
       </div>
 
       <div class="project-card">
@@ -856,10 +856,11 @@ footer{
     <div class="section-title">
       <small>My Gallery</small>
       <h2>ছবির গ্যালারি</h2>
-      <p>Firebase Storage-এ সংরক্ষিত ছবি</p>
+      <p>Cloudinary-তে সংরক্ষিত ছবি</p>
     </div>
 
     <div class="toolbar">
+
       <button
         class="btn btn-green hidden"
         id="galleryUploadBtn"
@@ -876,6 +877,7 @@ footer{
       >
         Logout
       </button>
+
     </div>
 
     <input
@@ -941,6 +943,7 @@ footer{
     <div id="notesApp" class="hidden">
 
       <div class="toolbar">
+
         <button class="btn" onclick="newFolder()">
           <i class="fas fa-folder-plus"></i>
           Folder তৈরি
@@ -954,6 +957,7 @@ footer{
         <button class="btn btn-gray" onclick="logout()">
           Logout
         </button>
+
       </div>
 
       <div class="note-layout">
@@ -1034,6 +1038,7 @@ footer{
           ></textarea>
 
           <div class="form-buttons">
+
             <button class="btn" type="submit">
               Send Email
             </button>
@@ -1045,6 +1050,7 @@ footer{
             >
               Send WhatsApp
             </button>
+
           </div>
 
         </form>
@@ -1059,6 +1065,8 @@ footer{
 </footer>
 
 <script type="module">
+
+/* FIREBASE IMPORT */
 
 import {
   initializeApp
@@ -1084,13 +1092,8 @@ import {
   updateDoc
 } from "https://www.gstatic.com/firebasejs/12.19.0/firebase-firestore.js";
 
-import {
-  getStorage,
-  ref,
-  uploadBytes,
-  getDownloadURL,
-  deleteObject
-} from "https://www.gstatic.com/firebasejs/12.19.0/firebase-storage.js";
+
+/* FIREBASE CONFIG */
 
 const firebaseConfig = {
   apiKey: "AIzaSyADuVB9UNyHmoid8POHMw6_11JEpM_9ek8",
@@ -1102,26 +1105,46 @@ const firebaseConfig = {
   measurementId: "G-C3312FZ7MZ"
 };
 
+
+/* CLOUDINARY CONFIG
+   তোমার Cloudinary তথ্য এখানে বসানো হয়েছে
+*/
+
+const CLOUDINARY_CLOUD_NAME = "idfdlafq";
+const CLOUDINARY_UPLOAD_PRESET = "mahfuz_gallery";
+
+
+/* INITIALIZE FIREBASE */
+
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
-const storage = getStorage(app);
 
 const ADMIN = "mahfuzrana1177@gmail.com";
 
 let currentUser = null;
 let selectedFolder = null;
 
+
 /* NAVIGATION */
+
 window.navigate = function(id){
 
   document.querySelectorAll(".page-section")
-    .forEach(section => section.classList.remove("active"));
+    .forEach(section => {
+      section.classList.remove("active");
+    });
 
-  document.getElementById(id).classList.add("active");
+  const target = document.getElementById(id);
+
+  if(target){
+    target.classList.add("active");
+  }
 
   document.querySelectorAll(".nav-links a")
-    .forEach(link => link.classList.remove("active-link"));
+    .forEach(link => {
+      link.classList.remove("active-link");
+    });
 
   const activeLink = [
     ...document.querySelectorAll(".nav-links a")
@@ -1146,12 +1169,16 @@ window.navigate = function(id){
   }
 };
 
+
 /* MOBILE MENU */
+
 window.toggleMenu = function(){
   document.getElementById("navLinks").classList.toggle("active");
 };
 
+
 /* THEME */
+
 window.toggleTheme = function(){
 
   document.body.classList.toggle("light");
@@ -1171,7 +1198,9 @@ if(localStorage.theme === "light"){
   toggleTheme();
 }
 
+
 /* AUTH STATE */
+
 onAuthStateChanged(auth, user => {
 
   currentUser = user?.email === ADMIN ? user : null;
@@ -1197,13 +1226,17 @@ onAuthStateChanged(auth, user => {
   }
 });
 
+
 /* LOGIN */
+
 window.login = async function(event){
 
   event.preventDefault();
 
   const status = document.getElementById("loginStatus");
   const password = document.getElementById("loginPassword").value;
+
+  status.textContent = "Login হচ্ছে...";
 
   try{
 
@@ -1214,21 +1247,27 @@ window.login = async function(event){
     );
 
     status.textContent = "সফলভাবে Login হয়েছে।";
+    document.getElementById("loginPassword").value = "";
 
   }catch(error){
 
     status.textContent =
       "পাসওয়ার্ড ভুল অথবা Login ব্যর্থ হয়েছে।";
 
+    console.error(error);
   }
 };
 
+
 /* LOGOUT */
+
 window.logout = function(){
   signOut(auth);
 };
 
+
 /* LOAD GALLERY */
+
 async function loadGallery(){
 
   const grid = document.getElementById("galleryGrid");
@@ -1247,8 +1286,10 @@ async function loadGallery(){
     grid.innerHTML = "";
 
     if(snapshot.empty){
+
       grid.innerHTML =
         "<p style='color:var(--muted)'>এখনও কোনো ছবি আপলোড করা হয়নি।</p>";
+
       return;
     }
 
@@ -1278,12 +1319,13 @@ async function loadGallery(){
       if(currentUser){
 
         const deleteButton = document.createElement("button");
+
         deleteButton.className = "btn btn-danger";
         deleteButton.innerHTML =
           '<i class="fas fa-trash"></i>';
 
         deleteButton.onclick = () => {
-          deleteImage(item.id, data.path);
+          deleteImage(item.id);
         };
 
         actions.appendChild(deleteButton);
@@ -1298,13 +1340,15 @@ async function loadGallery(){
   }catch(error){
 
     grid.innerHTML =
-      "<p style='color:#f87171'>ছবি লোড করা যাচ্ছে না। Firebase Rules চেক করুন।</p>";
+      "<p style='color:#f87171'>ছবি লোড করা যাচ্ছে না। Firestore Rules চেক করুন।</p>";
 
     console.error(error);
   }
 }
 
-/* UPLOAD IMAGES */
+
+/* UPLOAD IMAGES TO CLOUDINARY */
+
 window.uploadImages = async function(event){
 
   if(!currentUser){
@@ -1313,32 +1357,57 @@ window.uploadImages = async function(event){
   }
 
   const status = document.getElementById("galleryStatus");
+  const files = event.target.files;
 
-  for(const file of event.target.files){
+  if(!files.length){
+    return;
+  }
+
+  for(const file of files){
 
     try{
 
       status.textContent =
         file.name + " আপলোড হচ্ছে...";
 
-      const safeName =
-        file.name.replace(/[^\w.-]/g,"_");
+      const formData = new FormData();
 
-      const path =
-        "gallery/" + Date.now() + "_" + safeName;
+      formData.append("file", file);
 
-      const storageRef = ref(storage,path);
+      formData.append(
+        "upload_preset",
+        CLOUDINARY_UPLOAD_PRESET
+      );
 
-      await uploadBytes(storageRef,file);
+      const response = await fetch(
+        `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`,
+        {
+          method:"POST",
+          body:formData
+        }
+      );
 
-      const url = await getDownloadURL(storageRef);
+      const result = await response.json();
+
+      if(!response.ok){
+
+        throw new Error(
+          result.error?.message || "Cloudinary upload failed"
+        );
+      }
 
       await addDoc(collection(db,"gallery"),{
+
         name:file.name,
-        url:url,
-        path:path,
+
+        url:result.secure_url,
+
+        publicId:result.public_id,
+
         createdAt:serverTimestamp(),
+
         uploadedBy:currentUser.email
+
       });
 
     }catch(error){
@@ -1346,19 +1415,26 @@ window.uploadImages = async function(event){
       console.error(error);
 
       status.textContent =
-        "ছবি আপলোড করতে সমস্যা হয়েছে।";
+        file.name + " আপলোড করা যায়নি।";
 
+      alert(
+        "ছবি আপলোডে সমস্যা হয়েছে:\n" +
+        error.message
+      );
     }
   }
 
   status.textContent = "সব ছবি আপলোড হয়েছে।";
+
   event.target.value = "";
 
   loadGallery();
 };
 
-/* DELETE IMAGE */
-window.deleteImage = async function(id,path){
+
+/* DELETE IMAGE FROM FIRESTORE LIST */
+
+window.deleteImage = async function(id){
 
   if(
     !currentUser ||
@@ -1369,13 +1445,9 @@ window.deleteImage = async function(id,path){
 
   try{
 
-    await deleteDoc(doc(db,"gallery",id));
-
-    try{
-      await deleteObject(ref(storage,path));
-    }catch(error){
-      console.log("Storage file not found");
-    }
+    await deleteDoc(
+      doc(db,"gallery",id)
+    );
 
     loadGallery();
 
@@ -1387,64 +1459,90 @@ window.deleteImage = async function(id,path){
   }
 };
 
+
 /* LOAD FOLDERS */
+
 async function loadFolders(){
+
+  if(!currentUser){
+    return;
+  }
 
   const list = document.getElementById("folderList");
 
   list.innerHTML = "";
 
-  const snapshot = await getDocs(
-    collection(db,"noteFolders")
-  );
+  try{
 
-  if(!selectedFolder && snapshot.docs[0]){
-    selectedFolder = snapshot.docs[0].id;
-  }
+    const snapshot = await getDocs(
+      collection(db,"noteFolders")
+    );
 
-  snapshot.forEach(item => {
+    if(!selectedFolder && snapshot.docs[0]){
+      selectedFolder = snapshot.docs[0].id;
+    }
 
-    const data = item.data();
+    snapshot.forEach(item => {
 
-    const folder = document.createElement("div");
+      const data = item.data();
 
-    folder.className =
-      "folder-item " +
-      (item.id === selectedFolder ? "active" : "");
+      const folder = document.createElement("div");
 
-    folder.textContent = "📁 " + data.name;
+      folder.className =
+        "folder-item " +
+        (item.id === selectedFolder ? "active" : "");
 
-    folder.onclick = () => {
-      selectedFolder = item.id;
-      loadFolders();
-    };
+      folder.textContent = "📁 " + data.name;
 
-    list.appendChild(folder);
+      folder.onclick = () => {
+        selectedFolder = item.id;
+        loadFolders();
+      };
 
-  });
+      list.appendChild(folder);
 
-  if(snapshot.empty){
+    });
+
+    if(snapshot.empty){
+
+      list.innerHTML =
+        "<p style='color:var(--muted)'>কোনো Folder নেই।</p>";
+
+      document.getElementById("noteList").innerHTML = "";
+
+      document.getElementById("selectedFolderTitle")
+        .textContent = "Notes";
+
+      return;
+    }
+
+    const selected = snapshot.docs.find(
+      item => item.id === selectedFolder
+    );
+
+    document.getElementById("selectedFolderTitle").textContent =
+      selected ? selected.data().name : "Notes";
+
+    loadNotes();
+
+  }catch(error){
+
+    console.error(error);
 
     list.innerHTML =
-      "<p style='color:var(--muted)'>কোনো Folder নেই।</p>";
-
-    document.getElementById("noteList").innerHTML = "";
-
-    return;
+      "<p style='color:#f87171'>Folder লোড করা যাচ্ছে না।</p>";
   }
-
-  const selected = snapshot.docs.find(
-    item => item.id === selectedFolder
-  );
-
-  document.getElementById("selectedFolderTitle").textContent =
-    selected ? selected.data().name : "Notes";
-
-  loadNotes();
 }
 
+
 /* CREATE FOLDER */
+
 window.newFolder = async function(){
+
+  if(!currentUser){
+    alert("আগে Admin Login করুন।");
+    return;
+  }
 
   const name = prompt("Folder-এর নাম লিখুন:");
 
@@ -1465,7 +1563,9 @@ window.newFolder = async function(){
   loadFolders();
 };
 
+
 /* LOAD NOTES */
+
 async function loadNotes(){
 
   const list = document.getElementById("noteList");
@@ -1535,8 +1635,15 @@ async function loadNotes(){
   }
 }
 
+
 /* CREATE NOTE */
+
 window.newNote = async function(){
+
+  if(!currentUser){
+    alert("আগে Admin Login করুন।");
+    return;
+  }
 
   if(!selectedFolder){
     alert("আগে একটি Folder তৈরি করুন।");
@@ -1569,7 +1676,9 @@ window.newNote = async function(){
   loadNotes();
 };
 
+
 /* EDIT NOTE */
+
 window.editNote = async function(id,title,content){
 
   const newTitle = prompt(
@@ -1601,7 +1710,9 @@ window.editNote = async function(id,title,content){
   loadNotes();
 };
 
+
 /* DELETE NOTE */
+
 window.removeNote = async function(id){
 
   if(!confirm("Note ডিলেট করবেন?")){
@@ -1615,7 +1726,9 @@ window.removeNote = async function(id){
   loadNotes();
 };
 
+
 /* SEND EMAIL */
+
 window.sendMessage = function(event){
 
   event.preventDefault();
@@ -1637,7 +1750,9 @@ window.sendMessage = function(event){
     `mailto:mahfuzrana1177@gmail.com?subject=Portfolio Contact&body=${body}`;
 };
 
+
 /* SEND WHATSAPP */
+
 window.sendWhatsApp = function(){
 
   const name =
@@ -1659,12 +1774,18 @@ window.sendWhatsApp = function(){
   );
 };
 
+
+/* YEAR */
+
 document.getElementById("year").textContent =
   new Date().getFullYear();
+
+
+/* INITIAL GALLERY LOAD */
 
 loadGallery();
 
 </script>
 
 </body>
-</html>
+  </html>
