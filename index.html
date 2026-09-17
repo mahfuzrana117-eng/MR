@@ -3,10 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Md Mahfuz Rana Personal Portfolio">
 <title>Md Mahfuz Rana | Portfolio</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
 <style>
@@ -16,26 +18,29 @@
   --card:rgba(17,27,46,.78);
   --text:#f1f5f9;
   --muted:#94a3b8;
-  --p:#3b82f6;
-  --s:#22d3ee;
+  --primary:#3b82f6;
+  --secondary:#22d3ee;
+  --success:#10b981;
+  --danger:#ef4444;
+  --warning:#f59e0b;
   --border:rgba(148,163,184,.15);
-  --shadow:0 20px 60px #0005;
+  --shadow:0 20px 60px rgba(0,0,0,.35);
 }
 
 body.light{
   --bg:#f1f5f9;
-  --soft:#fff;
-  --card:#ffffffdd;
+  --soft:#ffffff;
+  --card:rgba(255,255,255,.88);
   --text:#0f172a;
   --muted:#64748b;
-  --border:#0f172a1a;
-  --shadow:0 20px 50px #0f172a14;
+  --border:rgba(15,23,42,.12);
+  --shadow:0 20px 50px rgba(15,23,42,.12);
 }
 
 *{
-  box-sizing:border-box;
   margin:0;
   padding:0;
+  box-sizing:border-box;
 }
 
 html{
@@ -43,35 +48,37 @@ html{
 }
 
 body{
-  font-family:Poppins,'Hind Siliguri',sans-serif;
+  min-height:100vh;
   background:var(--bg);
   color:var(--text);
+  font-family:Poppins,'Hind Siliguri',sans-serif;
   line-height:1.7;
-  min-height:100vh;
-  transition:.3s;
+  transition:.3s ease;
+  overflow-x:hidden;
 }
 
-body:before,
-body:after{
+body::before,
+body::after{
   content:"";
   position:fixed;
   width:400px;
   height:400px;
-  filter:blur(160px);
+  border-radius:50%;
+  filter:blur(150px);
   opacity:.12;
-  z-index:-1;
   pointer-events:none;
+  z-index:-1;
 }
 
-body:before{
-  background:var(--p);
+body::before{
+  background:var(--primary);
   top:-180px;
-  left:-120px;
+  left:-150px;
 }
 
-body:after{
-  background:var(--s);
-  right:-120px;
+body::after{
+  background:var(--secondary);
+  right:-150px;
   bottom:-180px;
 }
 
@@ -86,23 +93,30 @@ textarea{
   font:inherit;
 }
 
+button{
+  cursor:pointer;
+}
+
 .container{
   width:min(1120px,90%);
   margin:auto;
 }
 
+/* HEADER */
+
 header{
   position:fixed;
   top:0;
+  left:0;
   width:100%;
-  z-index:20;
-  background:#070b14dd;
+  z-index:100;
+  background:rgba(7,11,20,.82);
   backdrop-filter:blur(18px);
   border-bottom:1px solid var(--border);
 }
 
 body.light header{
-  background:#f1f5f9dd;
+  background:rgba(241,245,249,.85);
 }
 
 nav{
@@ -113,31 +127,55 @@ nav{
 }
 
 .logo{
-  font-size:24px;
+  font-size:25px;
   font-weight:800;
   cursor:pointer;
+  letter-spacing:-1px;
 }
 
-.logo span,
-.nav-links a:hover,
-.nav-links a.active-link{
-  color:var(--s);
+.logo span{
+  color:var(--secondary);
 }
 
 .nav-links{
   display:flex;
-  gap:24px;
+  align-items:center;
+  gap:25px;
   list-style:none;
 }
 
 .nav-links a{
-  font-size:14px;
   color:var(--muted);
+  font-size:14px;
   cursor:pointer;
+  transition:.3s;
+  position:relative;
+}
+
+.nav-links a::after{
+  content:"";
+  position:absolute;
+  width:0;
+  height:2px;
+  background:var(--secondary);
+  left:0;
+  bottom:-7px;
+  transition:.3s;
+}
+
+.nav-links a:hover,
+.nav-links a.active-link{
+  color:var(--secondary);
+}
+
+.nav-links a:hover::after,
+.nav-links a.active-link::after{
+  width:100%;
 }
 
 .nav-actions{
   display:flex;
+  align-items:center;
   gap:10px;
 }
 
@@ -146,10 +184,17 @@ nav{
   width:40px;
   height:40px;
   border:1px solid var(--border);
+  border-radius:10px;
   background:var(--card);
   color:var(--text);
-  border-radius:10px;
-  cursor:pointer;
+  transition:.3s;
+}
+
+.icon-btn:hover,
+.menu-btn:hover{
+  color:var(--secondary);
+  border-color:var(--secondary);
+  transform:translateY(-2px);
 }
 
 .menu-btn{
@@ -159,10 +204,12 @@ nav{
   font-size:22px;
 }
 
+/* SECTIONS */
+
 .page-section{
   display:none;
-  padding:110px 0 70px;
-  animation:fade .35s;
+  padding:115px 0 75px;
+  animation:pageFade .45s ease;
 }
 
 .page-section.active{
@@ -170,63 +217,102 @@ nav{
 }
 
 #home.active{
+  min-height:100vh;
   display:flex;
   align-items:center;
-  min-height:100vh;
   padding-top:75px;
 }
 
-@keyframes fade{
+@keyframes pageFade{
   from{
     opacity:0;
-    transform:translateY(12px);
+    transform:translateY(15px);
   }
   to{
     opacity:1;
-    transform:none;
+    transform:translateY(0);
   }
 }
 
+/* HOME */
+
 .hero-content{
+  width:100%;
   display:grid;
   grid-template-columns:1.1fr .9fr;
   align-items:center;
   gap:60px;
-  width:100%;
 }
 
 .badge{
   display:inline-flex;
-  gap:8px;
-  padding:7px 13px;
-  border:1px solid #22d3ee40;
-  background:#22d3ee0f;
+  align-items:center;
+  gap:9px;
+  padding:8px 15px;
   border-radius:30px;
-  color:var(--s);
+  color:var(--secondary);
+  background:rgba(34,211,238,.08);
+  border:1px solid rgba(34,211,238,.25);
   font-size:13px;
-  margin-bottom:22px;
+  margin-bottom:23px;
 }
 
 .badge i{
   font-size:8px;
+  animation:pulse 1.5s infinite;
+}
+
+@keyframes pulse{
+  0%,100%{opacity:.4}
+  50%{opacity:1}
 }
 
 .hero h1{
   font-size:clamp(40px,6vw,70px);
   line-height:1.12;
   letter-spacing:-3px;
-  margin-bottom:20px;
+  margin-bottom:22px;
 }
 
 .hero h1 span{
-  background:linear-gradient(90deg,var(--p),var(--s));
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
   -webkit-background-clip:text;
   -webkit-text-fill-color:transparent;
 }
 
-.hero p{
+.hero-description{
   color:var(--muted);
-  max-width:520px;
+  max-width:550px;
+  font-size:15px;
+}
+
+.typing-text{
+  color:var(--secondary);
+  font-weight:600;
+  min-height:30px;
+  margin-top:12px;
+  font-size:18px;
+}
+
+.hero-clock{
+  display:flex;
+  flex-wrap:wrap;
+  gap:12px;
+  margin-top:28px;
+}
+
+.clock-box{
+  padding:10px 16px;
+  border:1px solid var(--border);
+  background:var(--card);
+  border-radius:12px;
+  color:var(--muted);
+  font-size:13px;
+}
+
+.clock-box i{
+  color:var(--secondary);
+  margin-right:5px;
 }
 
 .profile-wrap{
@@ -236,58 +322,94 @@ nav{
 
 .profile-card{
   width:360px;
-  min-height:430px;
+  min-height:440px;
+  padding:30px;
   border:1px solid var(--border);
-  border-radius:25px;
-  background:linear-gradient(145deg,#3b82f620,var(--card));
+  border-radius:28px;
+  background:linear-gradient(145deg,rgba(59,130,246,.15),var(--card));
   backdrop-filter:blur(20px);
   box-shadow:var(--shadow);
   display:flex;
   flex-direction:column;
   align-items:center;
   justify-content:center;
-  padding:30px;
+  position:relative;
+  overflow:hidden;
+}
+
+.profile-card::before{
+  content:"";
+  position:absolute;
+  width:180px;
+  height:180px;
+  border-radius:50%;
+  border:1px solid rgba(34,211,238,.18);
+  top:-70px;
+  right:-70px;
+}
+
+.profile-card::after{
+  content:"";
+  position:absolute;
+  width:120px;
+  height:120px;
+  border-radius:50%;
+  border:1px solid rgba(59,130,246,.2);
+  bottom:-45px;
+  left:-45px;
 }
 
 .profile-img{
-  width:200px;
-  height:200px;
+  width:205px;
+  height:205px;
   border-radius:50%;
-  border:4px solid #22d3ee99;
   object-fit:cover;
-  box-shadow:0 0 35px #22d3ee26;
+  border:4px solid rgba(34,211,238,.65);
+  box-shadow:0 0 40px rgba(34,211,238,.18);
+  position:relative;
+  z-index:1;
 }
 
 .profile-card h3{
   margin-top:22px;
   font-size:22px;
+  position:relative;
+  z-index:1;
 }
 
 .profile-card p{
-  color:var(--s);
-  font-size:13px;
+  color:var(--secondary);
+  font-size:14px;
+  position:relative;
+  z-index:1;
 }
 
 .socials{
   display:flex;
   gap:12px;
-  margin-top:18px;
+  margin-top:20px;
+  position:relative;
+  z-index:1;
 }
 
 .socials a{
-  width:38px;
-  height:38px;
+  width:39px;
+  height:39px;
   border:1px solid var(--border);
   border-radius:50%;
   display:grid;
   place-items:center;
   color:var(--muted);
+  transition:.3s;
 }
 
 .socials a:hover{
-  color:var(--s);
-  border-color:var(--s);
+  color:var(--secondary);
+  border-color:var(--secondary);
+  transform:translateY(-4px);
 }
+
+/* TITLES */
 
 .section-title{
   text-align:center;
@@ -295,9 +417,10 @@ nav{
 }
 
 .section-title small{
-  color:var(--s);
-  letter-spacing:3px;
+  color:var(--secondary);
   font-size:11px;
+  letter-spacing:3px;
+  text-transform:uppercase;
 }
 
 .section-title h2{
@@ -305,19 +428,30 @@ nav{
   margin-top:8px;
 }
 
-.section-title p,
-.glass-card p{
+.section-title p{
   color:var(--muted);
   font-size:14px;
+  margin-top:8px;
 }
+
+/* CARDS */
 
 .glass-card{
   background:var(--card);
   border:1px solid var(--border);
-  border-radius:18px;
+  border-radius:20px;
   padding:28px;
   backdrop-filter:blur(15px);
   box-shadow:var(--shadow);
+}
+
+.glass-card h3{
+  margin-bottom:10px;
+}
+
+.glass-card p{
+  color:var(--muted);
+  font-size:14px;
 }
 
 .about-grid,
@@ -329,41 +463,62 @@ nav{
 
 .info-list{
   list-style:none;
-  margin-top:18px;
+  margin-top:15px;
 }
 
 .info-list li{
   display:flex;
   justify-content:space-between;
+  gap:15px;
+  padding:11px 0;
   border-bottom:1px solid var(--border);
-  padding:10px 0;
   font-size:13px;
 }
 
-.info-list span:first-child{
+.info-list li span:first-child{
   color:var(--muted);
 }
+
+/* BUTTONS */
 
 .btn{
   border:0;
   border-radius:10px;
   padding:11px 18px;
-  cursor:pointer;
-  color:white;
-  background:linear-gradient(135deg,var(--p),#2563eb);
+  color:#fff;
+  background:linear-gradient(135deg,var(--primary),#2563eb);
   font-size:13px;
+  transition:.3s;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:8px;
+}
+
+.btn:hover{
+  transform:translateY(-2px);
+  box-shadow:0 8px 20px rgba(59,130,246,.2);
+}
+
+.btn-green{
+  background:linear-gradient(135deg,#059669,#047857);
 }
 
 .btn-danger{
-  background:#dc2626;
+  background:linear-gradient(135deg,#ef4444,#b91c1c);
 }
 
 .btn-gray{
   background:#475569;
 }
 
-.btn-green{
-  background:#059669;
+.btn-warning{
+  background:#d97706;
+}
+
+.btn-small{
+  padding:7px 11px;
+  font-size:12px;
 }
 
 .form-buttons{
@@ -371,6 +526,12 @@ nav{
   gap:10px;
   flex-wrap:wrap;
 }
+
+.hidden{
+  display:none!important;
+}
+
+/* FORM */
 
 form{
   display:grid;
@@ -381,29 +542,100 @@ input,
 textarea{
   width:100%;
   padding:13px 15px;
-  border-radius:10px;
   border:1px solid var(--border);
+  border-radius:11px;
+  outline:none;
   background:var(--soft);
   color:var(--text);
-  outline:none;
+  transition:.3s;
+}
+
+input:focus,
+textarea:focus{
+  border-color:var(--secondary);
+  box-shadow:0 0 0 3px rgba(34,211,238,.08);
 }
 
 textarea{
-  height:120px;
+  height:125px;
   resize:vertical;
 }
 
-.hidden{
-  display:none!important;
-}
+/* TOOLBAR */
 
 .toolbar{
   display:flex;
-  gap:10px;
-  flex-wrap:wrap;
+  align-items:center;
   justify-content:center;
+  flex-wrap:wrap;
+  gap:10px;
   margin-bottom:25px;
 }
+
+.search-box{
+  max-width:400px;
+  margin:0 auto 25px;
+  position:relative;
+}
+
+.search-box i{
+  position:absolute;
+  left:15px;
+  top:50%;
+  transform:translateY(-50%);
+  color:var(--muted);
+}
+
+.search-box input{
+  padding-left:42px;
+}
+
+/* STATUS & PROGRESS */
+
+.status{
+  min-height:22px;
+  color:var(--secondary);
+  text-align:center;
+  font-size:13px;
+  margin:12px 0;
+}
+
+.progress-wrap{
+  max-width:500px;
+  margin:15px auto;
+  display:none;
+}
+
+.progress-wrap.show{
+  display:block;
+}
+
+.progress-info{
+  display:flex;
+  justify-content:space-between;
+  color:var(--muted);
+  font-size:12px;
+  margin-bottom:7px;
+}
+
+.progress-bar{
+  width:100%;
+  height:8px;
+  background:var(--soft);
+  border-radius:20px;
+  overflow:hidden;
+  border:1px solid var(--border);
+}
+
+.progress-fill{
+  width:0%;
+  height:100%;
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+  border-radius:20px;
+  transition:.3s;
+}
+
+/* GALLERY */
 
 .gallery-grid{
   display:grid;
@@ -414,23 +646,73 @@ textarea{
 .gallery-card{
   background:var(--card);
   border:1px solid var(--border);
-  border-radius:16px;
+  border-radius:17px;
+  overflow:hidden;
+  transition:.3s;
+  animation:cardShow .4s ease;
+}
+
+.gallery-card:hover{
+  transform:translateY(-5px);
+  border-color:rgba(34,211,238,.4);
+}
+
+@keyframes cardShow{
+  from{
+    opacity:0;
+    transform:scale(.95);
+  }
+  to{
+    opacity:1;
+    transform:scale(1);
+  }
+}
+
+.gallery-image-wrap{
+  position:relative;
   overflow:hidden;
 }
 
 .gallery-card img{
   width:100%;
-  height:210px;
+  height:215px;
   object-fit:cover;
   display:block;
   cursor:pointer;
+  transition:.4s;
+}
+
+.gallery-card:hover img{
+  transform:scale(1.07);
+}
+
+.image-overlay{
+  position:absolute;
+  inset:0;
+  background:linear-gradient(transparent,rgba(0,0,0,.65));
+  opacity:0;
+  display:flex;
+  align-items:flex-end;
+  justify-content:center;
+  padding-bottom:15px;
+  transition:.3s;
+  pointer-events:none;
+}
+
+.gallery-card:hover .image-overlay{
+  opacity:1;
+}
+
+.image-overlay span{
+  color:#fff;
+  font-size:12px;
 }
 
 .gallery-card .card-actions{
   padding:12px;
   display:flex;
-  justify-content:space-between;
   align-items:center;
+  justify-content:space-between;
   gap:8px;
 }
 
@@ -441,6 +723,82 @@ textarea{
   white-space:nowrap;
 }
 
+.gallery-caption{
+  color:var(--muted);
+  font-size:12px;
+  padding:0 12px 10px;
+  min-height:20px;
+}
+
+/* LIGHTBOX */
+
+.lightbox{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.9);
+  z-index:999;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:25px;
+}
+
+.lightbox.show{
+  display:flex;
+}
+
+.lightbox-image{
+  max-width:90vw;
+  max-height:82vh;
+  object-fit:contain;
+  border-radius:12px;
+  box-shadow:0 0 50px rgba(0,0,0,.5);
+}
+
+.lightbox-close,
+.lightbox-prev,
+.lightbox-next{
+  position:absolute;
+  width:45px;
+  height:45px;
+  border:1px solid rgba(255,255,255,.2);
+  background:rgba(255,255,255,.1);
+  color:#fff;
+  border-radius:50%;
+  display:grid;
+  place-items:center;
+  font-size:18px;
+}
+
+.lightbox-close{
+  top:25px;
+  right:25px;
+}
+
+.lightbox-prev{
+  left:25px;
+  top:50%;
+  transform:translateY(-50%);
+}
+
+.lightbox-next{
+  right:25px;
+  top:50%;
+  transform:translateY(-50%);
+}
+
+.lightbox-caption{
+  position:absolute;
+  bottom:25px;
+  left:50%;
+  transform:translateX(-50%);
+  color:#fff;
+  font-size:13px;
+  text-align:center;
+}
+
+/* NOTES */
+
 .note-layout{
   display:grid;
   grid-template-columns:260px 1fr;
@@ -449,35 +807,47 @@ textarea{
 
 .folder-list{
   display:grid;
-  gap:8px;
+  gap:9px;
   margin-top:15px;
 }
 
 .folder-item{
-  padding:10px 12px;
+  padding:11px 13px;
   border:1px solid var(--border);
-  border-radius:9px;
-  cursor:pointer;
+  border-radius:10px;
   color:var(--muted);
+  cursor:pointer;
+  transition:.3s;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
 }
 
-.folder-item.active,
-.folder-item:hover{
-  color:var(--s);
-  border-color:var(--s);
+.folder-item:hover,
+.folder-item.active{
+  color:var(--secondary);
+  border-color:var(--secondary);
+  background:rgba(34,211,238,.05);
+}
+
+.folder-name{
+  overflow:hidden;
+  white-space:nowrap;
+  text-overflow:ellipsis;
 }
 
 .note-list{
   display:grid;
-  gap:12px;
+  gap:13px;
   margin-top:20px;
 }
 
 .note-item{
-  border:1px solid var(--border);
-  border-radius:12px;
-  padding:15px;
   background:var(--soft);
+  border:1px solid var(--border);
+  border-radius:13px;
+  padding:17px;
 }
 
 .note-item h4{
@@ -485,21 +855,82 @@ textarea{
 }
 
 .note-item p{
-  white-space:pre-wrap;
   color:var(--muted);
+  white-space:pre-wrap;
+  font-size:14px;
+}
+
+.note-date{
+  color:var(--muted);
+  font-size:11px;
+  margin-top:10px;
 }
 
 .note-actions{
   display:flex;
   gap:8px;
-  margin-top:10px;
+  margin-top:13px;
 }
 
-.status{
-  margin:12px 0;
-  color:var(--s);
-  font-size:13px;
+/* CONTACT */
+
+.contact-info p{
+  margin:14px 0;
+  display:flex;
+  align-items:center;
+  gap:10px;
 }
+
+.contact-info i{
+  color:var(--secondary);
+  width:20px;
+}
+
+/* TOAST */
+
+.toast-container{
+  position:fixed;
+  right:20px;
+  bottom:20px;
+  z-index:1000;
+  display:grid;
+  gap:10px;
+}
+
+.toast{
+  min-width:260px;
+  max-width:350px;
+  padding:13px 16px;
+  background:var(--card);
+  border:1px solid var(--border);
+  border-left:4px solid var(--secondary);
+  border-radius:12px;
+  box-shadow:var(--shadow);
+  color:var(--text);
+  font-size:13px;
+  animation:toastIn .3s ease;
+}
+
+.toast.error{
+  border-left-color:var(--danger);
+}
+
+.toast.success{
+  border-left-color:var(--success);
+}
+
+@keyframes toastIn{
+  from{
+    opacity:0;
+    transform:translateX(30px);
+  }
+  to{
+    opacity:1;
+    transform:translateX(0);
+  }
+}
+
+/* FOOTER */
 
 footer{
   border-top:1px solid var(--border);
@@ -507,6 +938,18 @@ footer{
   text-align:center;
   color:var(--muted);
   font-size:13px;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:950px){
+  .gallery-grid{
+    grid-template-columns:repeat(3,1fr);
+  }
+
+  .hero-content{
+    gap:35px;
+  }
 }
 
 @media(max-width:850px){
@@ -521,16 +964,16 @@ footer{
     text-align:center;
   }
 
-  .hero p{
+  .hero-description{
     margin:auto;
+  }
+
+  .hero-clock{
+    justify-content:center;
   }
 
   .profile-wrap{
     order:-1;
-  }
-
-  .gallery-grid{
-    grid-template-columns:repeat(2,1fr);
   }
 
   .nav-links{
@@ -539,10 +982,12 @@ footer{
     top:75px;
     left:0;
     width:100%;
-    background:var(--soft);
     padding:22px;
+    background:var(--soft);
+    border-bottom:1px solid var(--border);
     flex-direction:column;
     text-align:center;
+    gap:18px;
   }
 
   .nav-links.active{
@@ -553,13 +998,20 @@ footer{
     display:block;
   }
 
+  .gallery-grid{
+    grid-template-columns:repeat(2,1fr);
+  }
+
   .profile-card{
     width:320px;
-    min-height:390px;
   }
 }
 
-@media(max-width:450px){
+@media(max-width:500px){
+  .container{
+    width:92%;
+  }
+
   .hero h1{
     font-size:38px;
     letter-spacing:-1px;
@@ -576,6 +1028,30 @@ footer{
   .glass-card{
     padding:20px;
   }
+
+  .lightbox-prev{
+    left:10px;
+  }
+
+  .lightbox-next{
+    right:10px;
+  }
+
+  .lightbox-close{
+    top:15px;
+    right:15px;
+  }
+
+  .toast-container{
+    left:15px;
+    right:15px;
+    bottom:15px;
+  }
+
+  .toast{
+    min-width:0;
+    max-width:none;
+  }
 }
 </style>
 </head>
@@ -585,6 +1061,7 @@ footer{
 <header>
   <div class="container">
     <nav>
+
       <a class="logo" onclick="navigate('home')">
         Mahfuz<span>.</span>
       </a>
@@ -598,24 +1075,28 @@ footer{
       </ul>
 
       <div class="nav-actions">
-        <button class="icon-btn" onclick="toggleTheme()">
+        <button class="icon-btn" onclick="toggleTheme()" title="Theme">
           <i id="themeIcon" class="fas fa-sun"></i>
         </button>
 
-        <button class="menu-btn" onclick="toggleMenu()">
+        <button class="menu-btn" onclick="toggleMenu()" title="Menu">
           <i class="fas fa-bars"></i>
         </button>
       </div>
+
     </nav>
   </div>
 </header>
 
 <!-- HOME -->
+
 <section id="home" class="page-section active">
   <div class="container">
+
     <div class="hero-content">
 
       <div class="hero">
+
         <div class="badge">
           <i class="fas fa-circle"></i>
           Welcome to my portfolio
@@ -626,12 +1107,31 @@ footer{
           <span>Md Mahfuz Rana</span>
         </h1>
 
-        <p>
+        <p class="hero-description">
           Assalamualaikum, আমার ওয়েবসাইটে আপনাকে স্বাগতম।
+          এখানে আমার পরিচয়, ছবি, ব্যক্তিগত নোট এবং যোগাযোগের তথ্য দেখতে পারবেন।
         </p>
+
+        <div class="typing-text">
+          <span id="typingText"></span>
+        </div>
+
+        <div class="hero-clock">
+          <div class="clock-box">
+            <i class="fas fa-clock"></i>
+            <span id="digitalClock">00:00:00</span>
+          </div>
+
+          <div class="clock-box">
+            <i class="fas fa-calendar-days"></i>
+            <span id="digitalDate">Loading...</span>
+          </div>
+        </div>
+
       </div>
 
       <div class="profile-wrap">
+
         <div class="profile-card">
 
           <img
@@ -641,7 +1141,11 @@ footer{
             onerror="this.style.display='none';document.getElementById('fallback').classList.remove('hidden')"
           >
 
-          <div id="fallback" class="profile-img hidden" style="display:grid;place-items:center">
+          <div
+            id="fallback"
+            class="profile-img hidden"
+            style="display:grid;place-items:center;font-size:60px;color:var(--secondary)"
+          >
             <i class="fas fa-user"></i>
           </div>
 
@@ -649,31 +1153,36 @@ footer{
           <p>Student</p>
 
           <div class="socials">
-            <a href="https://www.facebook.com/share/19aAT7vTyc/" target="_blank">
+
+            <a href="https://www.facebook.com/share/19aAT7vTyc/" target="_blank" title="Facebook">
               <i class="fab fa-facebook-f"></i>
             </a>
 
-            <a href="https://www.instagram.com/mahfuzur_rahman_mahfuz_?stkn=dWQyd3llNXNqcnIw" target="_blank">
+            <a href="https://www.instagram.com/mahfuzur_rahman_mahfuz_?stkn=dWQyd3llNXNqcnIw" target="_blank" title="Instagram">
               <i class="fab fa-instagram"></i>
             </a>
 
-            <a href="https://wa.me/8801799264290" target="_blank">
+            <a href="https://wa.me/8801799264290" target="_blank" title="WhatsApp">
               <i class="fab fa-whatsapp"></i>
             </a>
 
-            <a href="tel:09658083118">
+            <a href="tel:09658083118" title="Phone">
               <i class="fas fa-phone"></i>
             </a>
+
           </div>
 
         </div>
+
       </div>
 
     </div>
+
   </div>
 </section>
 
 <!-- ABOUT -->
+
 <section id="about" class="page-section">
   <div class="container">
 
@@ -720,17 +1229,19 @@ footer{
       </div>
 
     </div>
+
   </div>
 </section>
 
 <!-- GALLERY -->
+
 <section id="gallery" class="page-section">
   <div class="container">
 
     <div class="section-title">
       <small>My Gallery</small>
       <h2>ছবির গ্যালারি</h2>
-      <p>জায়গা মতো রেখে দিন </p>
+      <p>স্মরণীয় ছবিগুলো এখানে সুন্দরভাবে সংরক্ষণ করুন</p>
     </div>
 
     <div class="toolbar">
@@ -740,7 +1251,7 @@ footer{
         id="galleryUploadBtn"
         onclick="document.getElementById('imageInput').click()"
       >
-        <i class="fas fa-upload"></i>
+        <i class="fas fa-cloud-arrow-up"></i>
         ছবি আপলোড
       </button>
 
@@ -749,6 +1260,7 @@ footer{
         id="logoutBtn"
         onclick="logout()"
       >
+        <i class="fas fa-right-from-bracket"></i>
         Logout
       </button>
 
@@ -763,13 +1275,36 @@ footer{
       onchange="uploadImages(event)"
     >
 
+    <div class="progress-wrap" id="progressWrap">
+      <div class="progress-info">
+        <span id="progressFileName">Uploading...</span>
+        <span id="progressPercent">0%</span>
+      </div>
+
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+    </div>
+
     <div id="galleryStatus" class="status"></div>
+
+    <div class="search-box">
+      <i class="fas fa-search"></i>
+      <input
+        id="gallerySearch"
+        type="search"
+        placeholder="ছবি খুঁজুন..."
+        oninput="filterGallery()"
+      >
+    </div>
+
     <div id="galleryGrid" class="gallery-grid"></div>
 
   </div>
 </section>
 
 <!-- NOTES -->
+
 <section id="notes" class="page-section">
   <div class="container">
 
@@ -779,18 +1314,21 @@ footer{
       <p>শুধু Admin account দিয়ে প্রবেশ করা যাবে</p>
     </div>
 
-    <!-- LOGIN BOX -->
+    <!-- LOGIN -->
+
     <div
       id="loginBox"
       class="glass-card"
       style="max-width:500px;margin:auto"
     >
+
       <h3>
         <i class="fas fa-lock"></i>
         Note Login
       </h3>
 
       <form onsubmit="login(event)">
+
         <input
           id="loginEmail"
           type="email"
@@ -806,14 +1344,18 @@ footer{
         >
 
         <button class="btn" type="submit">
+          <i class="fas fa-right-to-bracket"></i>
           Login
         </button>
+
       </form>
 
       <div id="loginStatus" class="status"></div>
+
     </div>
 
     <!-- NOTES APP -->
+
     <div id="notesApp" class="hidden">
 
       <div class="toolbar">
@@ -823,12 +1365,13 @@ footer{
           Folder তৈরি
         </button>
 
-        <button class="btn" onclick="newNote()">
+        <button class="btn btn-green" onclick="newNote()">
           <i class="fas fa-plus"></i>
           Note লিখুন
         </button>
 
         <button class="btn btn-gray" onclick="logout()">
+          <i class="fas fa-right-from-bracket"></i>
           Logout
         </button>
 
@@ -837,22 +1380,43 @@ footer{
       <div class="note-layout">
 
         <div class="glass-card">
-          <h3>Folders</h3>
+          <h3>
+            <i class="fas fa-folder"></i>
+            Folders
+          </h3>
+
           <div id="folderList" class="folder-list"></div>
         </div>
 
         <div class="glass-card">
-          <h3 id="selectedFolderTitle">Notes</h3>
+
+          <h3 id="selectedFolderTitle">
+            Notes
+          </h3>
+
+          <div class="search-box" style="margin:15px 0 0">
+            <i class="fas fa-search"></i>
+            <input
+              id="noteSearch"
+              type="search"
+              placeholder="Note খুঁজুন..."
+              oninput="filterNotes()"
+            >
+          </div>
+
           <div id="noteList" class="note-list"></div>
+
         </div>
 
       </div>
+
     </div>
 
   </div>
 </section>
 
 <!-- CONTACT -->
+
 <section id="contact" class="page-section">
   <div class="container">
 
@@ -864,10 +1428,11 @@ footer{
 
     <div class="contact-grid">
 
-      <div class="glass-card">
+      <div class="glass-card contact-info">
+
         <h3>Let's Connect 🤝</h3>
 
-        <p style="margin:15px 0">
+        <p style="color:var(--muted)">
           নতুন কোনো প্রজেক্ট বা আইডিয়া নিয়ে কথা বলতে চাইলে যোগাযোগ করুন।
         </p>
 
@@ -885,11 +1450,13 @@ footer{
 
         <p>
           <i class="fas fa-envelope"></i>
-          mahfuzrana1177@gmail.com
+          <span>mahfuzrana1177@gmail.com</span>
         </p>
+
       </div>
 
       <div class="glass-card">
+
         <form onsubmit="sendMessage(event)">
 
           <input
@@ -914,6 +1481,7 @@ footer{
           <div class="form-buttons">
 
             <button class="btn" type="submit">
+              <i class="fas fa-envelope"></i>
               Send Email
             </button>
 
@@ -922,21 +1490,55 @@ footer{
               type="button"
               onclick="sendWhatsApp()"
             >
+              <i class="fab fa-whatsapp"></i>
               Send WhatsApp
             </button>
 
           </div>
 
         </form>
+
       </div>
 
     </div>
+
   </div>
 </section>
 
 <footer>
   © <span id="year"></span> Md Mahfuz Rana. All Rights Reserved.
 </footer>
+
+<!-- LIGHTBOX -->
+
+<div class="lightbox" id="lightbox">
+
+  <button class="lightbox-close" onclick="closeLightbox()">
+    <i class="fas fa-xmark"></i>
+  </button>
+
+  <button class="lightbox-prev" onclick="previousImage()">
+    <i class="fas fa-chevron-left"></i>
+  </button>
+
+  <img
+    id="lightboxImage"
+    class="lightbox-image"
+    src=""
+    alt="Full Image"
+  >
+
+  <button class="lightbox-next" onclick="nextImage()">
+    <i class="fas fa-chevron-right"></i>
+  </button>
+
+  <div class="lightbox-caption" id="lightboxCaption"></div>
+
+</div>
+
+<!-- TOAST -->
+
+<div class="toast-container" id="toastContainer"></div>
 
 <script type="module">
 
@@ -986,7 +1588,7 @@ const CLOUDINARY_CLOUD_NAME = "idfdlafq";
 const CLOUDINARY_UPLOAD_PRESET = "mahfuz_gallery";
 
 
-/* INITIALIZE FIREBASE */
+/* INITIALIZE */
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
@@ -996,6 +1598,27 @@ const ADMIN = "mahfuzrana1177@gmail.com";
 
 let currentUser = null;
 let selectedFolder = null;
+
+let galleryImages = [];
+let currentImageIndex = 0;
+
+
+/* TOAST */
+
+window.showToast = function(message,type="success"){
+
+  const container = document.getElementById("toastContainer");
+
+  const toast = document.createElement("div");
+  toast.className = "toast " + type;
+  toast.textContent = message;
+
+  container.appendChild(toast);
+
+  setTimeout(() => {
+    toast.remove();
+  }, 3500);
+};
 
 
 /* NAVIGATION */
@@ -1030,7 +1653,10 @@ window.navigate = function(id){
 
   document.getElementById("navLinks").classList.remove("active");
 
-  window.scrollTo(0,0);
+  window.scrollTo({
+    top:0,
+    behavior:"smooth"
+  });
 
   if(id === "gallery"){
     loadGallery();
@@ -1055,609 +1681,50 @@ window.toggleTheme = function(){
 
   document.body.classList.toggle("light");
 
-  localStorage.theme =
-    document.body.classList.contains("light")
-      ? "light"
-      : "dark";
+  const isLight =
+    document.body.classList.contains("light");
+
+  localStorage.setItem(
+    "theme",
+    isLight ? "light" : "dark"
+  );
 
   document.getElementById("themeIcon").className =
-    document.body.classList.contains("light")
+    isLight
       ? "fas fa-moon"
       : "fas fa-sun";
 };
 
-if(localStorage.theme === "light"){
-  toggleTheme();
+if(localStorage.getItem("theme") === "light"){
+  document.body.classList.add("light");
+  document.getElementById("themeIcon").className =
+    "fas fa-moon";
 }
 
 
-/* AUTH STATE */
+/* DIGITAL CLOCK */
 
-onAuthStateChanged(auth, user => {
+function updateClock(){
 
-  currentUser = user?.email === ADMIN ? user : null;
+  const now = new Date();
 
-  document
-    .getElementById("galleryUploadBtn")
-    .classList.toggle("hidden", !currentUser);
+  document.getElementById("digitalClock").textContent =
+    now.toLocaleTimeString("en-BD");
 
-  document
-    .getElementById("logoutBtn")
-    .classList.toggle("hidden", !currentUser);
-
-  document
-    .getElementById("loginBox")
-    .classList.toggle("hidden", !!currentUser);
-
-  document
-    .getElementById("notesApp")
-    .classList.toggle("hidden", !currentUser);
-
-  if(currentUser){
-    loadFolders();
-  }
-});
-
-
-/* LOGIN */
-
-window.login = async function(event){
-
-  event.preventDefault();
-
-  const status = document.getElementById("loginStatus");
-  const password = document.getElementById("loginPassword").value;
-
-  status.textContent = "Login হচ্ছে...";
-
-  try{
-
-    await signInWithEmailAndPassword(
-      auth,
-      ADMIN,
-      password
-    );
-
-    status.textContent = "সফলভাবে Login হয়েছে।";
-    document.getElementById("loginPassword").value = "";
-
-  }catch(error){
-
-    status.textContent =
-      "পাসওয়ার্ড ভুল অথবা Login ব্যর্থ হয়েছে।";
-
-    console.error(error);
-  }
-};
-
-
-/* LOGOUT */
-
-window.logout = function(){
-  signOut(auth);
-};
-
-
-/* LOAD GALLERY */
-
-async function loadGallery(){
-
-  const grid = document.getElementById("galleryGrid");
-
-  grid.innerHTML = "<p>ছবি লোড হচ্ছে...</p>";
-
-  try{
-
-    const snapshot = await getDocs(
-      query(
-        collection(db,"gallery"),
-        orderBy("createdAt","desc")
-      )
-    );
-
-    grid.innerHTML = "";
-
-    if(snapshot.empty){
-
-      grid.innerHTML =
-        "<p style='color:var(--muted)'>এখনও কোনো ছবি আপলোড করা হয়নি।</p>";
-
-      return;
-    }
-
-    snapshot.forEach(item => {
-
-      const data = item.data();
-
-      const card = document.createElement("div");
-      card.className = "gallery-card";
-
-      const image = document.createElement("img");
-      image.src = data.url;
-      image.alt = data.name || "Gallery Image";
-
-      image.onclick = () => {
-        window.open(data.url, "_blank");
-      };
-
-      const actions = document.createElement("div");
-      actions.className = "card-actions";
-
-      const name = document.createElement("small");
-      name.textContent = data.name || "Image";
-
-      actions.appendChild(name);
-
-      if(currentUser){
-
-        const deleteButton = document.createElement("button");
-
-        deleteButton.className = "btn btn-danger";
-        deleteButton.innerHTML =
-          '<i class="fas fa-trash"></i>';
-
-        deleteButton.onclick = () => {
-          deleteImage(item.id);
-        };
-
-        actions.appendChild(deleteButton);
-      }
-
-      card.appendChild(image);
-      card.appendChild(actions);
-      grid.appendChild(card);
-
+  document.getElementById("digitalDate").textContent =
+    now.toLocaleDateString("bn-BD",{
+      weekday:"long",
+      year:"numeric",
+      month:"long",
+      day:"numeric"
     });
-
-  }catch(error){
-
-    grid.innerHTML =
-      "<p style='color:#f87171'>ছবি লোড করা যাচ্ছে না। Firestore Rules চেক করুন।</p>";
-
-    console.error(error);
-  }
 }
 
+updateClock();
+setInterval(updateClock,1000);
 
-/* UPLOAD IMAGES TO CLOUDINARY */
 
-window.uploadImages = async function(event){
+/* TYPING TEXT */
 
-  if(!currentUser){
-    alert("আগে Admin Login করুন।");
-    return;
-  }
-
-  const status = document.getElementById("galleryStatus");
-  const files = event.target.files;
-
-  if(!files.length){
-    return;
-  }
-
-  for(const file of files){
-
-    try{
-
-      status.textContent =
-        file.name + " আপলোড হচ্ছে...";
-
-      const formData = new FormData();
-
-      formData.append("file", file);
-
-      formData.append(
-        "upload_preset",
-        CLOUDINARY_UPLOAD_PRESET
-      );
-
-      const response = await fetch(
-        `https://api.cloudinary.com/v1_1/${CLOUDINARY_CLOUD_NAME}/image/upload`,
-        {
-          method:"POST",
-          body:formData
-        }
-      );
-
-      const result = await response.json();
-
-      if(!response.ok){
-
-        throw new Error(
-          result.error?.message || "Cloudinary upload failed"
-        );
-      }
-
-      await addDoc(collection(db,"gallery"),{
-
-        name:file.name,
-
-        url:result.secure_url,
-
-        publicId:result.public_id,
-
-        createdAt:serverTimestamp(),
-
-        uploadedBy:currentUser.email
-
-      });
-
-    }catch(error){
-
-      console.error(error);
-
-      status.textContent =
-        file.name + " আপলোড করা যায়নি।";
-
-      alert(
-        "ছবি আপলোডে সমস্যা হয়েছে:\n" +
-        error.message
-      );
-    }
-  }
-
-  status.textContent = "সব ছবি আপলোড হয়েছে।";
-
-  event.target.value = "";
-
-  loadGallery();
-};
-
-
-/* DELETE IMAGE FROM FIRESTORE LIST */
-
-window.deleteImage = async function(id){
-
-  if(
-    !currentUser ||
-    !confirm("ছবিটি ডিলেট করবেন?")
-  ){
-    return;
-  }
-
-  try{
-
-    await deleteDoc(
-      doc(db,"gallery",id)
-    );
-
-    loadGallery();
-
-  }catch(error){
-
-    alert("ছবি ডিলেট করা যায়নি।");
-    console.error(error);
-
-  }
-};
-
-
-/* LOAD FOLDERS */
-
-async function loadFolders(){
-
-  if(!currentUser){
-    return;
-  }
-
-  const list = document.getElementById("folderList");
-
-  list.innerHTML = "";
-
-  try{
-
-    const snapshot = await getDocs(
-      collection(db,"noteFolders")
-    );
-
-    if(!selectedFolder && snapshot.docs[0]){
-      selectedFolder = snapshot.docs[0].id;
-    }
-
-    snapshot.forEach(item => {
-
-      const data = item.data();
-
-      const folder = document.createElement("div");
-
-      folder.className =
-        "folder-item " +
-        (item.id === selectedFolder ? "active" : "");
-
-      folder.textContent = "📁 " + data.name;
-
-      folder.onclick = () => {
-        selectedFolder = item.id;
-        loadFolders();
-      };
-
-      list.appendChild(folder);
-
-    });
-
-    if(snapshot.empty){
-
-      list.innerHTML =
-        "<p style='color:var(--muted)'>কোনো Folder নেই।</p>";
-
-      document.getElementById("noteList").innerHTML = "";
-
-      document.getElementById("selectedFolderTitle")
-        .textContent = "Notes";
-
-      return;
-    }
-
-    const selected = snapshot.docs.find(
-      item => item.id === selectedFolder
-    );
-
-    document.getElementById("selectedFolderTitle").textContent =
-      selected ? selected.data().name : "Notes";
-
-    loadNotes();
-
-  }catch(error){
-
-    console.error(error);
-
-    list.innerHTML =
-      "<p style='color:#f87171'>Folder লোড করা যাচ্ছে না।</p>";
-  }
-};
-
-
-/* CREATE FOLDER */
-
-window.newFolder = async function(){
-
-  if(!currentUser){
-    alert("আগে Admin Login করুন।");
-    return;
-  }
-
-  const name = prompt("Folder-এর নাম লিখুন:");
-
-  if(!name || !name.trim()){
-    return;
-  }
-
-  const folder = await addDoc(
-    collection(db,"noteFolders"),
-    {
-      name:name.trim(),
-      createdAt:serverTimestamp()
-    }
-  );
-
-  selectedFolder = folder.id;
-
-  loadFolders();
-};
-
-
-/* LOAD NOTES */
-
-async function loadNotes(){
-
-  const list = document.getElementById("noteList");
-
-  list.innerHTML = "";
-
-  const snapshot = await getDocs(
-    collection(db,"notes")
-  );
-
-  let found = false;
-
-  snapshot.forEach(item => {
-
-    const data = item.data();
-
-    if(data.folderId !== selectedFolder){
-      return;
-    }
-
-    found = true;
-
-    const note = document.createElement("div");
-    note.className = "note-item";
-
-    const title = document.createElement("h4");
-    title.textContent = data.title;
-
-    const content = document.createElement("p");
-    content.textContent = data.content;
-
-    const actions = document.createElement("div");
-    actions.className = "note-actions";
-
-    const editButton = document.createElement("button");
-    editButton.className = "btn";
-    editButton.textContent = "Edit";
-
-    editButton.onclick = () => {
-      editNote(item.id,data.title,data.content);
-    };
-
-    const deleteButton = document.createElement("button");
-    deleteButton.className = "btn btn-danger";
-    deleteButton.textContent = "Delete";
-
-    deleteButton.onclick = () => {
-      removeNote(item.id);
-    };
-
-    actions.appendChild(editButton);
-    actions.appendChild(deleteButton);
-
-    note.appendChild(title);
-    note.appendChild(content);
-    note.appendChild(actions);
-
-    list.appendChild(note);
-
-  });
-
-  if(!found){
-
-    list.innerHTML =
-      "<p style='color:var(--muted)'>এই Folder-এ কোনো Note নেই।</p>";
-
-  }
-}
-
-
-/* CREATE NOTE */
-
-window.newNote = async function(){
-
-  if(!currentUser){
-    alert("আগে Admin Login করুন।");
-    return;
-  }
-
-  if(!selectedFolder){
-    alert("আগে একটি Folder তৈরি করুন।");
-    return;
-  }
-
-  const title = prompt("Note-এর শিরোনাম:");
-
-  if(!title){
-    return;
-  }
-
-  const content = prompt("Note লিখুন:");
-
-  if(content === null){
-    return;
-  }
-
-  await addDoc(
-    collection(db,"notes"),
-    {
-      folderId:selectedFolder,
-      title:title,
-      content:content,
-      createdAt:serverTimestamp(),
-      owner:currentUser.email
-    }
-  );
-
-  loadNotes();
-};
-
-
-/* EDIT NOTE */
-
-window.editNote = async function(id,title,content){
-
-  const newTitle = prompt(
-    "শিরোনাম:",
-    title
-  );
-
-  if(!newTitle){
-    return;
-  }
-
-  const newContent = prompt(
-    "Note:",
-    content
-  );
-
-  if(newContent === null){
-    return;
-  }
-
-  await updateDoc(
-    doc(db,"notes",id),
-    {
-      title:newTitle,
-      content:newContent
-    }
-  );
-
-  loadNotes();
-};
-
-
-/* DELETE NOTE */
-
-window.removeNote = async function(id){
-
-  if(!confirm("Note ডিলেট করবেন?")){
-    return;
-  }
-
-  await deleteDoc(
-    doc(db,"notes",id)
-  );
-
-  loadNotes();
-};
-
-
-/* SEND EMAIL */
-
-window.sendMessage = function(event){
-
-  event.preventDefault();
-
-  const name =
-    document.getElementById("contactName").value;
-
-  const email =
-    document.getElementById("contactEmail").value;
-
-  const message =
-    document.getElementById("contactMessage").value;
-
-  const body = encodeURIComponent(
-    `নাম: ${name}\nইমেইল: ${email}\n\nমেসেজ:\n${message}`
-  );
-
-  location.href =
-    `mailto:mahfuzrana1177@gmail.com?subject=Portfolio Contact&body=${body}`;
-};
-
-
-/* SEND WHATSAPP */
-
-window.sendWhatsApp = function(){
-
-  const name =
-    document.getElementById("contactName").value;
-
-  const email =
-    document.getElementById("contactEmail").value;
-
-  const message =
-    document.getElementById("contactMessage").value;
-
-  const body = encodeURIComponent(
-    `নাম: ${name}\nইমেইল: ${email}\n\nমেসেজ:\n${message}`
-  );
-
-  window.open(
-    "https://wa.me/8801799264290?text=" + body,
-    "_blank"
-  );
-};
-
-
-/* YEAR */
-
-document.getElementById("year").textContent =
-  new Date().getFullYear();
-
-
-/* INITIAL GALLERY LOAD */
-
-loadGallery();
-
-</script>
-
-</body>
-</html>
+const typingWords = [
+  "welcome"
